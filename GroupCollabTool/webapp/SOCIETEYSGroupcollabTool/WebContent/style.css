@@ -1,0 +1,87 @@
+body,html
+{
+	height:100%;
+	min-height:100%;
+	margin:0;
+	padding:0;
+	outline:0;
+	border:0;
+}
+
+#wrap
+{
+	height:100%;
+	min-height:100%;
+	width:1000px;
+	margin:0 auto;
+}
+
+#header
+{
+	font:Verdana, Arial, Helvetica, sans-serif;
+	font-size:36px;
+	font-weight:bold;
+	text-align:left;
+	text-indent:30px;
+	padding:20px;
+	vertical-align:text-bottom;
+	background-color:#3300CC;
+	height:100px;
+}
+
+#activityfeed
+{
+	height:100%;
+	min-height:100%;
+	float:left;
+	width:750px;
+	background:#00FFFF;
+}
+
+#post
+{
+	margin:5px;
+	height:auto;
+	min-height:54px;
+	font-size:14px;
+	text-align:left;
+	vertical-align:top;
+	background-color:#FFFFFF;
+}
+
+#groupmembers
+{
+	height:100%;
+	min-height:100%;
+	float:right;
+	width:250px;
+	background:#FFFF00;
+}
+
+#person
+{
+	margin:5px;
+	height:48px;
+	min-height:48px;
+	font-size:12px;
+	font-weight:bold;
+	text-align:left;
+	vertical-align:top;
+	background-color:#FFFFFF;
+}
+
+img.profile
+{ 
+    float: left;
+	margin:2px;
+	width:48;
+	height:48;
+}
+
+h6
+{
+	font-size:10px;
+	font-style:italic;
+	text-align:right;
+	color:#555555
+}
