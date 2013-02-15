@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 
 import com.SOCIETEYS.Framework.*;
+import com.SOCIETEYS.GroupCollabTool.MainPage.ActivityFeed.ActivityFeed;
 
 public class CollabToolDesktop implements IPage
 {
