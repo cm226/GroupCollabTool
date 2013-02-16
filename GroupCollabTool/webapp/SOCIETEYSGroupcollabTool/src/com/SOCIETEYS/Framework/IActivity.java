@@ -1,3 +1,9 @@
+/**
+ * Interface class used for the storage of activities to be fed to the activity feed.
+ * Created as an interface as there may be different variables of activity we may wish to
+ * parse differently such as distinguishing user and subversion posts. 
+ */
+
 package com.SOCIETEYS.Framework;
 
 import java.util.Date;
