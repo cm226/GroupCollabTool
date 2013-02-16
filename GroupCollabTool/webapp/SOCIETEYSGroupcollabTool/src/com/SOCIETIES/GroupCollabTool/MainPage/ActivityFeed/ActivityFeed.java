@@ -1,12 +1,11 @@
-package com.SOCIETEYS.GroupCollabTool.MainPage.ActivityFeed;
+package com.SOCIETIES.GroupCollabTool.MainPage.ActivityFeed;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import com.SOCIETEYS.Framework.IActivity;
-import com.SOCIETEYS.Framework.IPageComponent;
+import com.SOCIETIES.Framework.IActivity;
+import com.SOCIETIES.Framework.IPageComponent;
 
 public class ActivityFeed implements IPageComponent
 {

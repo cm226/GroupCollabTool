@@ -3,7 +3,7 @@
  * A Page will often consist of multiple PageComponents.
  */
 
-package com.SOCIETEYS.Framework;
+package com.SOCIETIES.Framework;
 
 public interface IPageComponent extends IWriteable
 {

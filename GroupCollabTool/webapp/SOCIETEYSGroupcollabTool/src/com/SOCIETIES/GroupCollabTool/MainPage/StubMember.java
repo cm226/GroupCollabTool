@@ -1,4 +1,4 @@
-package com.SOCIETEYS.GroupCollabTool.MainPage;
+package com.SOCIETIES.GroupCollabTool.MainPage;
 
 import java.util.Date;
 

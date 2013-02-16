@@ -1,8 +1,8 @@
-package com.SOCIETEYS.GroupCollabTool.MainPage.ActivityFeed;
+package com.SOCIETIES.GroupCollabTool.MainPage.ActivityFeed;
 
 import java.util.Date;
 
-import com.SOCIETEYS.Framework.IActivity;
+import com.SOCIETIES.Framework.IActivity;
 
 public class StubActivity implements IActivity {
 

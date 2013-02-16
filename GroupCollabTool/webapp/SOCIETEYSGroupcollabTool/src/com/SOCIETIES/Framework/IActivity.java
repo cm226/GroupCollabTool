@@ -4,7 +4,7 @@
  * parse differently such as distinguishing user and subversion posts. 
  */
 
-package com.SOCIETEYS.Framework;
+package com.SOCIETIES.Framework;
 
 import java.util.Date;
 

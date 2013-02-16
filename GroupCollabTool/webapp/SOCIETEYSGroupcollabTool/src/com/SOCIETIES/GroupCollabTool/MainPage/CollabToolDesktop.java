@@ -2,14 +2,14 @@
  * Main/home page for the SOCIETIES Group Collaboration Tool
  */
 
-package com.SOCIETEYS.GroupCollabTool.MainPage;
+package com.SOCIETIES.GroupCollabTool.MainPage;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.SOCIETEYS.Framework.*;
-import com.SOCIETEYS.GroupCollabTool.MainPage.ActivityFeed.ActivityFeed;
+import com.SOCIETIES.Framework.*;
+import com.SOCIETIES.GroupCollabTool.MainPage.ActivityFeed.ActivityFeed;
 
 public class CollabToolDesktop implements IPage
 {

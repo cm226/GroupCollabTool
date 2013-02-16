@@ -1,11 +1,11 @@
-package com.SOCIETEYS.GroupCollabTool.MainPage;
+package com.SOCIETIES.GroupCollabTool.MainPage;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.SOCIETEYS.Framework.IPageComponent;
-import com.SOCIETEYS.GroupCollabTool.MainPage.StubMember;
+import com.SOCIETIES.Framework.IPageComponent;
+import com.SOCIETIES.GroupCollabTool.MainPage.StubMember;
 
 public class Members implements IPageComponent
 {

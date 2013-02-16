@@ -1,4 +1,4 @@
-package com.SOCIETEYS.GroupCollabTool;
+package com.SOCIETIES.GroupCollabTool;
 
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.SOCIETEYS.GroupCollabTool.MainPage.CollabToolDesktop;
+import com.SOCIETIES.GroupCollabTool.MainPage.CollabToolDesktop;
 
 
 /**

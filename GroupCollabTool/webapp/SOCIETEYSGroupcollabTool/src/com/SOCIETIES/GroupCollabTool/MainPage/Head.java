@@ -1,8 +1,8 @@
-package com.SOCIETEYS.GroupCollabTool.MainPage;
+package com.SOCIETIES.GroupCollabTool.MainPage;
 
 import java.io.PrintWriter;
 
-import com.SOCIETEYS.Framework.IPageComponent;
+import com.SOCIETIES.Framework.IPageComponent;
 
 public class Head implements IPageComponent 
 
