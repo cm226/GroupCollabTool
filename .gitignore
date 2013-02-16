@@ -2,3 +2,5 @@
 Servers/
 
 *.class
+*.classpath
+*.project
