@@ -10,36 +10,38 @@ import com.SOCIETEYS.Framework.IPageComponent;
 
 public class ActivityFeed implements IPageComponent
 {
-	ArrayList<IActivity> activitys = new ArrayList<IActivity>();
+	ArrayList<IActivity> m_activities = new ArrayList<IActivity>();
 	
 	public ActivityFeed()
 	{
-		this.activitys.add(new StubActivity());
-		this.activitys.add(new StubActivity());
-		this.activitys.add(new StubActivity());
-		this.activitys.add(new StubActivity());
+		this.m_activities.add(new StubActivity());
+		this.m_activities.add(new StubActivity());
+		this.m_activities.add(new StubActivity());
+		this.m_activities.add(new StubActivity());
 	}
 	
 	@Override
-	public void writePage(PrintWriter out) {
-		out.write("<div id=\"activityfeed\">");
+	public void writePage(PrintWriter out)
+	{		
+		out.println("\t\t<div id=\"activityfeed\">");
+		out.println("");
 	    
-		Iterator<IActivity> activityIt = this.activitys.iterator();		
+		Iterator<IActivity> activityIt = this.m_activities.iterator();		
 		
 		while(activityIt.hasNext())
 		{
 			IActivity activity = activityIt.next();
 			
-			out.write("<div id=\"post\">");
-			out.write("<img src=\""+activity.getImageURL()+"\" class=\"profile\">");
-			out.write("<b>"+activity.getType()+":</b>");
-			out.write(activity.getdescription());
-			out.write("<h6>  - Posted 14/02/2013  </h6>");
-			out.write("</div> <!-- post -->");
-		
+			out.println("\t\t\t<div id=\"post\">");
+			out.println("\t\t\t\t<img src=\"" + activity.getImageURL() + "\" class=\"profile\">");
+			out.println("\t\t\t\t<b>" + activity.getType() + ":</b> " + activity.getdescription());
+			out.println("\t\t\t\t<h6>  - Posted 14/02/2013  </h6>");
+			out.println("\t\t\t</div> <!-- post -->");
+			out.println("");
 		}
  
-		out.write("</div>  <!-- activityfeed -->");
+		out.println("\t\t</div>  <!-- activityfeed -->");
+		out.println("");
 	}
 
 }

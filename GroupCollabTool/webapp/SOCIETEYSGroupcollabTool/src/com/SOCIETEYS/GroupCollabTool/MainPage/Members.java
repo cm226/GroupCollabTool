@@ -1,28 +1,45 @@
 package com.SOCIETEYS.GroupCollabTool.MainPage;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.SOCIETEYS.Framework.IPageComponent;
+import com.SOCIETEYS.GroupCollabTool.MainPage.StubMember;
 
-public class Members implements IPageComponent {
-
-	@Override
-	public void writePage(PrintWriter out) {		
-		
-		 out.write("<div id=\"groupmembers\">");   
-		 out.write("<div id=\"person\">");
-	     out.write("<img src=\"avatar1.jpg\" class=\"profile\">");
-	     out.write("    Bryce Dickson <br />");
-	     out.write("<a href=\"mailto:brad1600@gmail.com\">brad1600@gmail.com</a>");
-	     out.write("</div> <!-- person -->");
-         
-	     out.write("<div id=\"person\">");
-	     out.write("<img src=\"avatar2.jpg\" class=\"profile\">");
-	     out.write("Craig Matear <br />");
-	     out.write("<a href=\"mailto:brad1600@gmail.com\">brad1600@gmail.com</a>");
-	     out.write("</div> <!-- person -->");
-     	 out.write("</div>  <!-- groupmembers -->");
-
+public class Members implements IPageComponent
+{
+	ArrayList<StubMember> m_members = new ArrayList<StubMember>();
+	
+	public Members()
+	{
+		this.m_members.add(new StubMember());
+		this.m_members.add(new StubMember());
+		this.m_members.add(new StubMember());
+		this.m_members.add(new StubMember());
 	}
 
+	@Override
+	public void writePage(PrintWriter out)
+	{
+		out.println("\t\t<div id=\"groupmembers\">");
+		out.println("");
+		
+		Iterator<StubMember> memberIt = this.m_members.iterator();		
+		
+		while(memberIt.hasNext())
+		{
+			StubMember member = memberIt.next();
+			
+			out.println("\t\t\t<div id=\"person\">");
+			out.println("\t\t\t\t<img src=\"" + member.getAvatar() + "\" class=\"profile\">");
+			out.println("\t\t\t\t" + member.getName() + " <br />");
+			out.println("\t\t\t\t<a href=\"mailto:" + member.getEMail() + "\">" + member.getEMail() + "</a>");
+			out.println("\t\t\t</div> <!-- person -->");
+			out.println("");
+		}
+		
+		out.println("\t\t</div>  <!-- groupmembers -->");
+		out.println("");
+	}
 }

@@ -7,11 +7,12 @@ import com.SOCIETEYS.Framework.IPageComponent;
 public class PageHeader implements IPageComponent {
 
 	@Override
-	public void writePage(PrintWriter out) {
-		out.write("<div id=\"header\">");
-		out.write("Group Collaboration Tool");
-		out.write("</div>  <!-- header -->");
-
+	public void writePage(PrintWriter out)
+	{
+		out.println("\t\t<div id=\"header\">");
+		out.println("\t\tGroup Collaboration Tool");
+		out.println("\t\t</div>  <!-- header -->");
+		out.println("");
 	}
 
 }
