@@ -3,6 +3,7 @@ package com.SOCIETIES.GroupCollabTool.Comms;
 import java.util.Date;
 
 import com.SOCIETIES.Framework.IActivity;
+import com.SOCIETIES.GroupCollabTool.Comms.Shared.ActivityDescription;
 
 public abstract class ActivityBase implements IActivity
 {	

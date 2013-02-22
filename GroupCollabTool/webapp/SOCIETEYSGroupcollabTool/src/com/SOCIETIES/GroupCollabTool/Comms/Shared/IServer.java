@@ -1,4 +1,4 @@
-package com.SOCIETIES.GroupCollabTool.Comms;
+package com.SOCIETIES.GroupCollabTool.Comms.Shared;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

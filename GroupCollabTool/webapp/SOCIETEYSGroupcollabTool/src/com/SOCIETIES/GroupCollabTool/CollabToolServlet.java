@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.SOCIETIES.GroupCollabTool.Comms.SOCIETIESInterfaceLayer;
 import com.SOCIETIES.GroupCollabTool.MainPage.CollabToolDesktop;
 
 
@@ -31,9 +32,15 @@ public class CollabToolServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
+		intrfacelyr.getActiviteys();
+		
+		
 		PrintWriter out = response.getWriter();
 		CollabToolDesktop mainPage = new CollabToolDesktop();
 		mainPage.writePage(out);
+		
+		
 	}
 
 	/**
