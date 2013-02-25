@@ -32,8 +32,8 @@ public class CollabToolServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
-		intrfacelyr.getActiviteys();
+		//SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
+		//intrfacelyr.getActiviteys();
 		
 		
 		PrintWriter out = response.getWriter();
