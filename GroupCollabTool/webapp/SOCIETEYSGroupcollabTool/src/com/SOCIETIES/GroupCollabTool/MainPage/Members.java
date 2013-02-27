@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.SOCIETIES.Framework.IPageComponent;
-import com.SOCIETIES.GroupCollabTool.MainPage.StubMember;
+import com.SOCIETIES.GroupCollabTool.Comms.Member;
 
 public class Members implements IPageComponent
 {
-	ArrayList<StubMember> m_members = new ArrayList<StubMember>();
+	ArrayList<Member> m_members = new ArrayList<Member>();
 	
 	public Members()
 	{
-		this.m_members.add(new StubMember());
-		this.m_members.add(new StubMember());
-		this.m_members.add(new StubMember());
-		this.m_members.add(new StubMember());
+		this.m_members.add(new Member());
+		this.m_members.add(new Member());
+		this.m_members.add(new Member());
+		this.m_members.add(new Member());
 	}
 
 	@Override
@@ -25,16 +25,16 @@ public class Members implements IPageComponent
 		out.println("\t\t<div id=\"groupmembers\">");
 		out.println("");
 		
-		Iterator<StubMember> memberIt = this.m_members.iterator();		
+		Iterator<Member> memberIt = this.m_members.iterator();		
 		
 		while(memberIt.hasNext())
 		{
-			StubMember member = memberIt.next();
+			Member member = memberIt.next();
 			
 			out.println("\t\t\t<div id=\"person\">");
-			out.println("\t\t\t\t<img src=\"" + member.getAvatar() + "\" class=\"profile\">");
-			out.println("\t\t\t\t" + member.getName() + " <br />");
-			out.println("\t\t\t\t<a href=\"mailto:" + member.getEMail() + "\">" + member.getEMail() + "</a>");
+			out.println("\t\t\t\t<img src=\"" + member.GetImage() + "\" class=\"profile\">");
+			out.println("\t\t\t\t" + member.GetFirstName() + "" + member.GetLastName() + " <br />");
+			out.println("\t\t\t\t<a href=\"mailto:" + member.GetEMail() + "\">" + member.GetEMail() + "</a>");
 			out.println("\t\t\t</div> <!-- person -->");
 			out.println("");
 		}
