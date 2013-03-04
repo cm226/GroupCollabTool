@@ -5,15 +5,15 @@ import java.util.List;
 import org.societies.api.cis.management.ICis;
 import org.societies.api.cis.management.ICisManager;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
 public class testService implements ITestService
 {
 	private ICisManager myCisManager;
-	//private Logger logging = LoggerFactory.getLogger(this.getClass());
+	private static Logger LOG = LoggerFactory.getLogger(testService.class);
 	
 	private Updater updaterThread;
 	private Thread t1 ;
@@ -23,16 +23,8 @@ public class testService implements ITestService
 	
 	public void initService()
 	{
-		List<ICis> cisList =  myCisManager.getCisList();
-		if(cisList.size() > 0)
-		{
-			t1 = new Thread(updaterThread = new Updater(cisList.get(0).getActivityFeed()), "updaterThread");
+			t1 = new Thread(updaterThread = new Updater(myCisManager), "updaterThread");
 			t1.start();
-		}
-		else
-		{
-			//log no CIS's
-		}
 	}
 	
 	

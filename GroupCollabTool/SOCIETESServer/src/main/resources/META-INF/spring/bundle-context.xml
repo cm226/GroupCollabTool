@@ -12,8 +12,9 @@
 
  
   <bean id="groupCollabTool" 
-  		class="org.societies.testService.testService" 
-  		init-method="initService" >
+  		class="org.societies.GroupCollabTool.testService" 
+  		init-method="initService" 
+  		destroy-method="onShutdown">
    	 <property name="myCisManager" ref="cisManager"/>
    	 
   </bean>

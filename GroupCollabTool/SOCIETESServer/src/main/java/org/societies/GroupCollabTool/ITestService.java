@@ -4,4 +4,5 @@ public interface ITestService
 {
 
 	public void initService();
+	public  void onShutdown();
 }

@@ -7,9 +7,14 @@ public class UpdaterCallback implements IActivityFeedCallback {
 
 
 	@Override
-	public void receiveResult(MarshaledActivityFeed arg0) {
-		// TODO Auto-generated method stub
+	public void receiveResult(MarshaledActivityFeed arg0)
+	{
+		 if(arg0.getAddActivityResponse().isResult())
+		 { // retrieve the AddResponse Marshalled object and the value of the result of the operation
+			System.out.println("it seemed to work???");
+		 }
 		
 	}
+
 
 }
