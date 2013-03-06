@@ -22,7 +22,6 @@
 	 
 	<osgi:reference id="cisManager" interface="org.societies.api.cis.management.ICisManager" />
 	
-	
 		<osgi:service ref="groupCollabTool" interface="org.societies.GroupCollabTool.ITestService">
 			<osgi:service-properties>
 			<entry key="TargetPlatform" value="SOCIETIES" />
