@@ -1,9 +1,10 @@
 package com.SOCIETIES.GroupCollabTool.Comms;
 
-import com.SOCIETIES.Framework.IMember;
+//import com.SOCIETIES.Framework.IMember;
 
-public class Member implements IMember
+public class Member //implements IMember
 {
+
 	public Member()
 	{
 		m_sFirstName = "Bryce";
@@ -11,6 +12,7 @@ public class Member implements IMember
 		m_sEMail = "bfd1@hw.ac.uk";
 	}
 	
+	String m_sUserID = new String();
 	String m_sFirstName = new String();
 	String m_sLastName = new String();
 	String m_sEMail = new String();

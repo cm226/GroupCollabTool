@@ -10,17 +10,18 @@ public class SOCIETIESInterfaceLayer {
 	
 	 public SOCIETIESInterfaceLayer() {}
 
-	 public void getActiviteys()
+	 public ActivityDescription[] getActiviteys()
 	 {
 	        String host = "localhost";
 	        try {
 	            Registry registry = LocateRegistry.getRegistry(host);
 	            IServer stub = (IServer) registry.lookup("IServer");
 	            ActivityDescription[] response = stub.getActivitys();
-	            System.out.println("response: " + response[0].getDesc());
+	            return response;
 	        } catch (Exception e) {
 	            System.err.println("Client exception: " + e.toString());
 	            e.printStackTrace();
+	            return null;
 	        }
 	    }
 

@@ -1,14 +1,24 @@
 package org.societies.GroupCollabTool;
 
 
+
+import java.rmi.Remote;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.societies.Comms.RMIServer;
 import org.societies.api.activity.IActivity;
 import org.societies.api.activity.IActivityFeed;
 import org.societies.api.cis.management.ICis;
 import org.societies.api.cis.management.ICisManager;
+
+import org.societies.Comms.RMIServer.*;
+
+import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
 
 public class Updater implements Runnable
 {
@@ -18,7 +28,7 @@ public class Updater implements Runnable
 	Updater( ICisManager cisManager)
 	{
 		this.manager = cisManager;
-		
+		this.initRMI();
 	}
 
 	@Override
@@ -38,14 +48,13 @@ public class Updater implements Runnable
 				addToActivityFeed(cisList.get(0).getActivityFeed(),change);
 			
 				System.out.println("added to activity feed");
-				Double milliSecondsSinceepoch = new Double((new Date()).getTime());
-				cisList.get(0).getActivityFeed().getActivities("0 "+milliSecondsSinceepoch.toString(),new UpdaterCallback());
 			}
 			else
 			{
 				System.out.println("no CISs");
 				//logging.info("No CIS's to moniter");
 			}
+			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -60,6 +69,37 @@ public class Updater implements Runnable
 	{
 		this.running = false;
 	}
+	
+	private void initRMI()
+	{
+		try {
+	            RMIServer obj = new RMIServer();
+	            IServer stub = (IServer) UnicastRemoteObject.exportObject((Remote) obj, 0);
+
+	            // Bind the remote object's stub in the registry
+	            Registry registry = LocateRegistry.getRegistry();
+	            registry.bind("IServer", stub);
+
+	        } catch (Exception e) {
+	            System.err.println("Server exception: " + e.toString());
+	            e.printStackTrace();
+	        }
+	}
+	
+	/*private CVersionControlPost[] getActiviteys()
+	{
+		
+		List<ICis> cisList =  manager.getCisList();
+		
+		UpdaterCallback activityGetter = new UpdaterCallback();
+		
+		Double milliSecondsSinceepoch = new Double((new Date()).getTime());
+		cisList.get(0).getActivityFeed().getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
+		
+		return activityGetter.getActiviteys(); // blocking call
+		
+		
+	}*/
 	
 	private void addToActivityFeed(IActivityFeed activityFeed, CVersionControlPost change)
 	{
@@ -83,9 +123,7 @@ public class Updater implements Runnable
 		newActivity1.setTarget(csvLinks);
 		newActivity1.setVerb(change.GetPostedDate().toString());
  
-		activityFeed.addActivity(newActivity1, new UpdaterCallback());
-		
-		
+		//activityFeed.addActivity(newActivity1, new UpdaterCallback());
 	}
 
 }

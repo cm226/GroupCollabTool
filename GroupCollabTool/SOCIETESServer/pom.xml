@@ -3,8 +3,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<!-- change the artifactid to your project artifactid -->
-	<groupId>org.societies.useragent</groupId>
-	<artifactId>monitoring</artifactId>
+	<groupId>org.societies.GroupCollabTool</groupId>
+	<artifactId>GroupCollabTool</artifactId>
 	<packaging>bundle</packaging>
 	<version>0.1</version>
 	<developers>
@@ -37,6 +37,12 @@
 	    <version>1.6.1</version>
 	    <scope>provided</scope>
 	</dependency>
+	
+	<dependency>
+	    <groupId>com.SOCIETIES.GroupCollabTool.Comms</groupId>
+	    <artifactId>Shared</artifactId>
+	    <version>1.0</version>
+	</dependency>
 
 	</dependencies>
 
@@ -65,5 +71,12 @@
             <name>Societies Maven Repository</name>
             <url>http://maven.ict-societies.eu/nexus/content/repositories/thirdparty/</url>
         </repository>
+        
+        <repository>
+	        <id>project.local</id>
+	        <name>project</name>
+	        <url>file:${project.basedir}/repo</url>
+    	</repository>
+        
     </repositories>
 </project>
