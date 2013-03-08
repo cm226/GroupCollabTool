@@ -5,6 +5,17 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Group Collaboration Tool</title>
+
+<script type='text/javascript'>
+
+function contentTypeChange()
+{
+	var myTextField = document.getElementById('selectVal');
+	window.location = 'http://localhost:8090/SOCIETEYSGroupcollabTool/CollabToolServlet?stype='+myTextField.value;
+}
+
+</script> 
+
 </head>
 
 <body>
@@ -13,7 +24,14 @@
         <div id="header">
         Group Collaboration Tool
         </div>  <!-- header -->
-    
+		<div id="ContentPicker">
+			<select onchange='javascript:contentTypeChange();' id="selectVal">
+				<option>Documents</option>
+				<option>Code</option>
+				<option>All</option>
+			</select>
+		</div> <!-- ContentPicker-->
+		
         <div id="activityfeed">
         
             <div id="post">

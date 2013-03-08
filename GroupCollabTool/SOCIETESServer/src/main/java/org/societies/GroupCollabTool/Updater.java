@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.societies.Comms.RMIServer;
 import org.societies.api.activity.IActivity;
 import org.societies.api.activity.IActivityFeed;
@@ -24,10 +25,12 @@ public class Updater implements Runnable
 {
 	private ICisManager manager;
 	private boolean running = true;
+	private Logger log;
 	
-	Updater( ICisManager cisManager)
+	Updater( ICisManager cisManager, Logger log)
 	{
 		this.manager = cisManager;
+		this.log  = log;
 		this.initRMI();
 	}
 
@@ -47,12 +50,11 @@ public class Updater implements Runnable
 				CVersionControlPost change = new CVersionControlPost("Git", new Date(), "commit desc",links);
 				addToActivityFeed(cisList.get(0).getActivityFeed(),change);
 			
-				System.out.println("added to activity feed");
+				log.info("added to activity feed");
 			}
 			else
 			{
-				System.out.println("no CISs");
-				//logging.info("No CIS's to moniter");
+				log.warn("No CIS's to moniter");
 			}
 			
 			try {
@@ -81,7 +83,8 @@ public class Updater implements Runnable
 	            registry.bind("IServer", stub);
 
 	        } catch (Exception e) {
-	            System.err.println("Server exception: " + e.toString());
+	        	
+	            log.error(" Group CollabTool RMI Server exception: " + e.toString());
 	            e.printStackTrace();
 	        }
 	}

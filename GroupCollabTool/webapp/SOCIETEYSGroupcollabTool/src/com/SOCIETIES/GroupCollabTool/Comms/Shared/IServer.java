@@ -5,5 +5,6 @@ import java.rmi.RemoteException;
 
 public interface IServer extends Remote
 {
-	ActivityDescription[] getActivitys() throws RemoteException;	
+	ActivityDescription[] getActivitys() throws RemoteException;
+	ActivityDescription[] getActivitys(String type) throws RemoteException;
 }

@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sun.security.x509.AVA;
-
 import com.SOCIETIES.Framework.IActivity;
 import com.SOCIETIES.Framework.IPageComponent;
 import com.SOCIETIES.GroupCollabTool.Comms.SOCIETIESInterfaceLayer;
@@ -15,10 +13,11 @@ public class ActivityFeed implements IPageComponent
 {
 	ArrayList<IActivity> m_activities = new ArrayList<IActivity>();
 	
-	public ActivityFeed()
+	public ActivityFeed(String contentType)
 	{
 		SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
-		ActivityDescription[] activitys =  intrfacelyr.getActiviteys();
+		ActivityDescription[] activitys =  intrfacelyr.getActiviteys(contentType);
+		
 		if(activitys != null)
 		{
 			for(int i = 0 ; i < activitys.length; i++)

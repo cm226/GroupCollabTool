@@ -16,11 +16,12 @@ public class CollabToolDesktop implements IPage
 
 	private ArrayList<IPageComponent> components = new ArrayList<IPageComponent>();
 	
-	public CollabToolDesktop()
+	public CollabToolDesktop(String contentType)
 	{
 		// possibly make this handled in a static function to avoid overhead of creating it every time?
 		components.add(new PageHeader());
-		components.add(new ActivityFeed());
+		components.add(new ContentPicker(contentType));
+		components.add(new ActivityFeed(contentType));
 		components.add(new Members());
 	}
 	
@@ -31,11 +32,8 @@ public class CollabToolDesktop implements IPage
 		out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
 		out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
 		out.println("");
-		out.println("<head>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
-		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-		out.println("<title>Group Collaboration Tool</title>");
-		out.println("</head>");
+		Head h = new Head();
+		h.writePage(out);
 		out.println("");
 		
 		//Start work on the body of the page

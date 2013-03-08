@@ -23,7 +23,7 @@ public class testService implements ITestService
 	
 	public void initService()
 	{
-			t1 = new Thread(updaterThread = new Updater(myCisManager), "updaterThread");
+			t1 = new Thread(updaterThread = new Updater(myCisManager, LOG), "updaterThread");
 			t1.start();
 	}
 	
@@ -34,9 +34,12 @@ public class testService implements ITestService
 		{
 			this.updaterThread.stopUpdateing();
 			
-			try {
+			try
+			{
 				t1.join(1000);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) 
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

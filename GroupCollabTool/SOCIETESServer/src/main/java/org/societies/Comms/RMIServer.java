@@ -23,4 +23,20 @@ public ActivityDescription[] getActivitys() throws RemoteException
 	return activitys;
 	
 } 
+
+
+@Override
+public ActivityDescription[] getActivitys(String type) throws RemoteException
+{
+	ActivityDescription[] activitys = new ActivityDescription[5];
+	activitys[0] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
+	activitys[1] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
+	activitys[2] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
+	activitys[3] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
+	activitys[4] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
+	
+	return activitys;
+	
+} 
+
 }

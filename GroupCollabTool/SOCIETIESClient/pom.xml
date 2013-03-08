@@ -1,51 +1,49 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<!-- change the artifactid to your project artifactid -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- change the artifactid to your project artifactid -->
 	<groupId>org.societies.GroupCollabTool</groupId>
-	<artifactId>GroupCollabTool</artifactId>
-	<packaging>bundle</packaging>
-	<version>0.1</version>
-	<developers>
-	    <developer>
-	      <id>cm226</id>
-	      <name>Craig</name>
-	      <email>cm226@hw.ac.uk</email>
-	      <organization>Heriot Watt</organization>
-	      <roles>
-	        <role>owner</role>
-	      </roles>
-	    </developer>
-	</developers>
-	
-
-
-	<dependencies>
-	
-	<dependency>
-		<groupId>org.societies.api.external</groupId>
-		<artifactId>societies-api</artifactId>
-		<version>0.5</version>
-		<scope>provided</scope>
-	</dependency>
-	
-	
-	<dependency>
+    <artifactId>GroupCollabToolClient</artifactId>
+    <packaging>bundle</packaging>
+    <version>0.1</version>
+    <developers>
+        <developer>
+            <id>cm226</id>
+            <name>Craig</name>
+            <email>cm226@hw.ac.uk</email>
+            <organization>Heriot Watt</organization>
+            <roles>
+                <role>owner</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <!-- Add your classpath dependencies here -->
+    <dependencies>
+        <dependency>
+            <groupId>org.societies.api.external</groupId>
+            <artifactId>societies-api</artifactId>
+            <version>0.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
 	    <groupId>org.slf4j</groupId>
 	    <artifactId>slf4j-simple</artifactId>
 	    <version>1.6.1</version>
 	    <scope>provided</scope>
-	</dependency>
-	
+	    </dependency>
+	    	
 	<dependency>
 	    <groupId>com.SOCIETIES.GroupCollabTool.Comms</groupId>
 	    <artifactId>Shared</artifactId>
 	    <version>2.0</version>
 	</dependency>
+	
 
-	</dependencies>
-
-	    <build>
+	
+    </dependencies>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -57,7 +55,7 @@
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Import-Package>*;resolution:=optional</Import-Package>
-                        <Export-Package></Export-Package>
+                        <!-- <Export-Package></Export-Package> -->
                     </instructions>
                 </configuration>
             </plugin>
@@ -76,6 +74,6 @@
 	        <name>project</name>
 	        <url>file:${project.basedir}/repo</url>
     	</repository>
-        
+    	
     </repositories>
 </project>

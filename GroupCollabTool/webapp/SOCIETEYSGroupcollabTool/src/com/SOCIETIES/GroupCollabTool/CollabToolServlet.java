@@ -33,7 +33,9 @@ public class CollabToolServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{		
 		PrintWriter out = response.getWriter();
-		CollabToolDesktop mainPage = new CollabToolDesktop();
+		String requestedContent = request.getParameter("stype");
+		
+		CollabToolDesktop mainPage = new CollabToolDesktop(requestedContent);
 		mainPage.writePage(out);
 		
 		
@@ -46,5 +48,6 @@ public class CollabToolServlet extends HttpServlet {
 	{
 		// TODO Auto-generated method stub
 	}
+	
 
 }
