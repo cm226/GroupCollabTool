@@ -6,12 +6,27 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.societies.api.identity.IIdentity;
+import org.societies.api.personalisation.model.IAction;
+import org.societies.api.personalisation.model.Action;
+import org.societies.api.useragent.monitoring.IUserActionMonitor;
+
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.ActivityDescription;
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
 
-public class RMIServer implements IServer {
-    
-public RMIServer() {}
+import org.societies.api.schema.servicelifecycle.model.ServiceResourceIdentifier;
+
+public class RMIServer implements IServer
+{
+	private IUserActionMonitor uam;
+	private IIdentity userID;
+	
+	
+public RMIServer(IUserActionMonitor uam, IIdentity userID)
+{
+	this.uam = uam;
+	this.userID = userID;
+}
 
 @Override
 public ActivityDescription[] getActivitys() throws RemoteException
@@ -31,6 +46,11 @@ public ActivityDescription[] getActivitys() throws RemoteException
 @Override
 public ActivityDescription[] getActivitys(String type) throws RemoteException
 {
+	
+	ServiceResourceIdentifier myServiceID = new ServiceResourceIdentifier();
+	IAction action = new Action(myServiceID, "GroupCollab", "ContntType",type);
+	this.uam.monitor(this.userID, action);
+	
 	ArrayList<ActivityDescription> activitys = new ArrayList<ActivityDescription>();
 	System.out.println("requesting type: "+type);
 	

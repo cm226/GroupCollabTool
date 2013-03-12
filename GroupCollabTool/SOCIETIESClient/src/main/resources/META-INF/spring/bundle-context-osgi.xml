@@ -35,5 +35,11 @@
 			<property name="serviceType" value="THIRD_PARTY_CLIENT" />
 			<property name="serviceCategory" value="collaberation" />
 		</bean>
+		
+		<osgi:reference id="uam" interface="org.societies.api.useragent.monitoring.IUserActionMonitor">
+		</osgi:reference>
+		
+		<osgi:reference id="commsMgr" interface="org.societies.api.comm.xmpp.interfaces.ICommManager">
+		</osgi:reference>
 	  
 </beans>

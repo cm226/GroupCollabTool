@@ -75,7 +75,7 @@ public class Updater implements Runnable
 	private void initRMI()
 	{
 		try {
-	            RMIServer obj = new RMIServer();
+	            RMIServer obj = new RMIServer(manager);
 	            IServer stub = (IServer) UnicastRemoteObject.exportObject((Remote) obj, 0);
 
 	            // Bind the remote object's stub in the registry
@@ -89,20 +89,7 @@ public class Updater implements Runnable
 	        }
 	}
 	
-	/*private CVersionControlPost[] getActiviteys()
-	{
-		
-		List<ICis> cisList =  manager.getCisList();
-		
-		UpdaterCallback activityGetter = new UpdaterCallback();
-		
-		Double milliSecondsSinceepoch = new Double((new Date()).getTime());
-		cisList.get(0).getActivityFeed().getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
-		
-		return activityGetter.getActiviteys(); // blocking call
-		
-		
-	}*/
+
 	
 	private void addToActivityFeed(IActivityFeed activityFeed, CVersionControlPost change)
 	{
@@ -126,7 +113,7 @@ public class Updater implements Runnable
 		newActivity1.setTarget(csvLinks);
 		newActivity1.setVerb(change.GetPostedDate().toString());
  
-		//activityFeed.addActivity(newActivity1, new UpdaterCallback());
+		activityFeed.addActivity(newActivity1, new UpdaterCallback());
 	}
 
 }

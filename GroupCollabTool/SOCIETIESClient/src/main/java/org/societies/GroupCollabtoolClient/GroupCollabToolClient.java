@@ -8,18 +8,29 @@ import java.rmi.server.UnicastRemoteObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.societies.GroupCollabTool.Comms.*;
+import org.societies.api.comm.xmpp.interfaces.ICommManager;
 import org.societies.api.css.devicemgmt.display.IDisplayableService;
+import org.societies.api.identity.IIdentity;
+import org.societies.api.useragent.monitoring.IUserActionMonitor;
 
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
 
 public class GroupCollabToolClient implements IClient
 {
 
+	private IUserActionMonitor uam;
+	private IIdentity userID;
+	private ICommManager commsMgr;
+
+	
 	private static Logger LOG = LoggerFactory.getLogger(GroupCollabToolClient.class);
+	
+	
 	
 	public void initService()
 	{
 		LOG.info("Client started");
+		userID = commsMgr.getIdManager().getThisNetworkNode();
 		initRMI();
 	}
 	
@@ -41,5 +52,18 @@ public class GroupCollabToolClient implements IClient
 	}
 	
 	
-
+	// Societies getters/ setters
+	
+	public void setuam(IUserActionMonitor uam)
+	{
+		this.uam = uam;
+	}
+	
+	public void setcommsMgr(ICommManager commMngr)
+	{
+		this.commsMgr = commMngr;
+	}
+	
+	
+	
 }

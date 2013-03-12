@@ -18,8 +18,6 @@
 	    </developer>
 	</developers>
 	
-
-
 	<dependencies>
 	
 	<dependency>
@@ -36,6 +34,14 @@
 	    <version>1.6.1</version>
 	    <scope>provided</scope>
 	</dependency>
+	
+	<dependency>
+		<groupId>org.simpleframework</groupId>
+		<artifactId>simple-xml</artifactId>
+		<version>2.6.9</version>
+		<scope>provided</scope>
+	</dependency>
+
 	
 	<dependency>
 	    <groupId>com.SOCIETIES.GroupCollabTool.Comms</groupId>
@@ -55,12 +61,30 @@
                     <instructions>
                         <Bundle-Activator></Bundle-Activator>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
-                        <Embed-Transitive>true</Embed-Transitive>
-                        <Import-Package>*;resolution:=optional</Import-Package>
-                        <Export-Package></Export-Package>
+                        <Embed-Transitive>false</Embed-Transitive>
                     </instructions>
                 </configuration>
             </plugin>
+            
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <type>bundle</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${spring.osgi.deploy.dir}</outputDirectory>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </plugin>
+            
+            
         </plugins>
     </build>
     <repositories>
