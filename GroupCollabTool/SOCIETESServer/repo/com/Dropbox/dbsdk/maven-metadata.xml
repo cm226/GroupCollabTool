@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.Dropbox</groupId>
+  <artifactId>dbsdk</artifactId>
+  <versioning>
+    <release>1.5.3</release>
+    <versions>
+      <version>1.5.3</version>
+    </versions>
+    <lastUpdated>20130316150757</lastUpdated>
+  </versioning>
+</metadata>

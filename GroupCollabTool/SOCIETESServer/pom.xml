@@ -48,6 +48,43 @@
 	    <artifactId>Shared</artifactId>
 	    <version>2.0</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dblogging</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dbsdk</artifactId>
+	    <version>1.5.3</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dbHttpClient</artifactId>
+	    <version>4.0.3</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dbHttpCore</artifactId>
+	    <version>4.0.1</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dbHttpMime</artifactId>
+	    <version>4.0.3</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.Dropbox</groupId>
+	    <artifactId>dbJsonSimple</artifactId>
+	    <version>1.1</version>
+	</dependency>
+	
 
 	</dependencies>
 

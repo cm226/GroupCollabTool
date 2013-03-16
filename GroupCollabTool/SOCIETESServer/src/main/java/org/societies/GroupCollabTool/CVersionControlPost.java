@@ -10,7 +10,7 @@ public class CVersionControlPost implements IFeedPost
     String m_Description;
     ArrayList<String> m_FilesChanged;
     
-    CVersionControlPost(String user, Date posted, String description, ArrayList<String> changes )
+    public CVersionControlPost(String user, Date posted, String description, ArrayList<String> changes )
     {
     	this.m_UserID = user;
     	this.m_Date = posted;
