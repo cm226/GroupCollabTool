@@ -8,31 +8,36 @@ public class CVersionControlPost implements IFeedPost
 	String m_UserID;
     Date m_Date;
     String m_Description;
-    ArrayList<String> m_FilesChanged;
+    ArrayList<String> m_Links;
+    
+    CVersionControlPost(String UserID, Date Date, String Description, ArrayList<String> Links)
+    {
+    	m_UserID = UserID;
+    	m_Date = Date;
+    	m_Description = Description;
+    	m_Links = Links;
+    }
     
 	@Override
 	public String GetUserID()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return m_UserID;
 	}
 	
 	@Override
 	public Date GetPostedDate()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return m_Date;
 	}
 	
 	@Override
 	public String GetDescription()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return m_Description;
 	}
 	
-	public ArrayList<String> GetFilesChanged()
+	public ArrayList<String> GetLinks()
 	{
-		return null;
+		return m_Links;
 	}
 }
