@@ -5,7 +5,7 @@
  * using it
  */
 
-package com.SOCIETIES.Framework;
+package com.SOCIETIES.GroupCollabTool.Comms.Shared;
 
 public interface IMember 
 {

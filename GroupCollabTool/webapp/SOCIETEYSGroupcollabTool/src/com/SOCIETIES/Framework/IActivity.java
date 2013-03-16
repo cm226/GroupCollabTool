@@ -6,6 +6,7 @@
 
 package com.SOCIETIES.Framework;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public interface IActivity 
@@ -13,6 +14,6 @@ public interface IActivity
 	String getType(); // returns where the activity is from 
 	Date getDate(); // return date posted
 	String getdescription(); // returns a description of the event
-	String getLinks(); // returns any associated urls with the activity (git commit links and so on)
+	ArrayList<String> getLinks(); // returns any associated urls with the activity (git commit links and so on)
 	String getImageURL(); // returns the image url for the image type 
 }

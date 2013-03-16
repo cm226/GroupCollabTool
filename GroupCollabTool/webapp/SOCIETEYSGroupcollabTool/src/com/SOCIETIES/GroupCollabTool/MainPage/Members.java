@@ -13,10 +13,9 @@ public class Members implements IPageComponent
 	
 	public Members()
 	{
-		this.m_members.add(new Member());
-		this.m_members.add(new Member());
-		this.m_members.add(new Member());
-		this.m_members.add(new Member());
+		this.m_members.add(new Member("userID", "Bryce", "Dickson", "bfd1@hw.ac.uk", "test.jpg"));
+		this.m_members.add(new Member("userID", "Craig", "Matear", "cm226@hw.ac.uk", "test.jpg"));
+		this.m_members.add(new Member("userID", "Maciej", "Dura", "msd2@hw.ac.uk", "test.jpg"));
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class Members implements IPageComponent
 			
 			out.println("\t\t\t<div id=\"person\">");
 			out.println("\t\t\t\t<img src=\"" + member.GetImage() + "\" class=\"profile\">");
-			out.println("\t\t\t\t" + member.GetFirstName() + "" + member.GetLastName() + " <br />");
+			out.println("\t\t\t\t" + member.GetFirstName() + " " + member.GetLastName() + " <br />");
 			out.println("\t\t\t\t<a href=\"mailto:" + member.GetEMail() + "\">" + member.GetEMail() + "</a>");
 			out.println("\t\t\t</div> <!-- person -->");
 			out.println("");
