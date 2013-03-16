@@ -115,5 +115,8 @@ public class Updater implements Runnable
  
 		activityFeed.addActivity(newActivity1, new UpdaterCallback());
 	}
+	
+	
+	
 
 }

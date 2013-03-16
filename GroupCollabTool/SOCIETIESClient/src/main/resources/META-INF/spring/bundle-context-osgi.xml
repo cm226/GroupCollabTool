@@ -30,9 +30,10 @@
 		
 		<bean id="serMetamodel" class="org.societies.api.schema.servicelifecycle.model.Service">
 			<property name="authorSignature" value="CraigMatear" />
-			<property name="serviceDescription" value="dose stuff" />
+			<property name="serviceDescription" value="Collaberation Tool for software projects" />
 			<property name="serviceName" value="GroupCollabTool" />
-			<property name="serviceType" value="THIRD_PARTY_CLIENT" />
+			  <property name="serviceType" value="THIRD_PARTY_CLIENT" /> 
+			<!--<property name="serviceType" value="THIRD_PARTY_SERVER" />-->
 			<property name="serviceCategory" value="collaberation" />
 		</bean>
 		
@@ -40,6 +41,9 @@
 		</osgi:reference>
 		
 		<osgi:reference id="commsMgr" interface="org.societies.api.comm.xmpp.interfaces.ICommManager">
-		</osgi:reference>
+		</osgi:reference> 
+		
+		<osgi:reference id="servics" interface="org.societies.api.services.IServices">
+		</osgi:reference> 
 	  
 </beans>

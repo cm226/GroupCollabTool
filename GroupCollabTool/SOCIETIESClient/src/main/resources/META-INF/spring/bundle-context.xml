@@ -15,20 +15,9 @@
   		class="org.societies.GroupCollabtoolClient.GroupCollabToolClient" 
   		init-method="initService" >
   		<property name="uam" ref="uam"/>
+  		<property name="commsMgr" ref="commsMgr"/>
+  		<property name="servics" ref="servics"/>
    	 
   </bean>
   
-  
-  <!-- 
-  
-  <bean id="iSocialData" 
-    	  class="org.societies.platform.socialdata.SocialData"
-    	  init-method="initSocialData">
-    
-   		 <property name="internalCtxBroker" ref="internalCtxBroker"/>
-		 <property name="commsMgr" 			ref="commsMgr"/>
-           
-    </bean>
-  
-   -->
 </beans>

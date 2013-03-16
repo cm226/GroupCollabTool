@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.societies.api.identity.IIdentity;
 import org.societies.api.personalisation.model.IAction;
@@ -20,26 +21,23 @@ public class RMIServer implements IServer
 {
 	private IUserActionMonitor uam;
 	private IIdentity userID;
+	private String defaultType;
+	private ServiceResourceIdentifier myServiceID;
+	private List<String> myServiceTypes;
 	
 	
-public RMIServer(IUserActionMonitor uam, IIdentity userID)
+public RMIServer(IUserActionMonitor uam, IIdentity userID, ServiceResourceIdentifier serviceID, List<String> myServiceTypes)
 {
 	this.uam = uam;
 	this.userID = userID;
+	this.myServiceID = serviceID;
+	this.myServiceTypes = myServiceTypes;
 }
 
 @Override
 public ActivityDescription[] getActivitys() throws RemoteException
 {
-	ActivityDescription[] activitys = new ActivityDescription[5];
-	activitys[0] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
-	activitys[1] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
-	activitys[2] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
-	activitys[3] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
-	activitys[4] = new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date());
-	
-	return activitys;
-	
+	return this.getActivitysBase(this.defaultType);
 } 
 
 
@@ -47,9 +45,15 @@ public ActivityDescription[] getActivitys() throws RemoteException
 public ActivityDescription[] getActivitys(String type) throws RemoteException
 {
 	
-	ServiceResourceIdentifier myServiceID = new ServiceResourceIdentifier();
-	IAction action = new Action(myServiceID, "GroupCollab", "ContntType",type);
+	IAction action = new Action(myServiceID, myServiceTypes.get(0), "contentType",type);
 	this.uam.monitor(this.userID, action);
+	
+	return this.getActivitysBase(type);
+	
+}
+
+private ActivityDescription[] getActivitysBase(String type)
+{
 	
 	ArrayList<ActivityDescription> activitys = new ArrayList<ActivityDescription>();
 	System.out.println("requesting type: "+type);
@@ -84,7 +88,12 @@ public ActivityDescription[] getActivitys(String type) throws RemoteException
 	}
 	
 	return actArr;
-	
-} 
+}
+
+public void updateDefaultType(String newType)
+{
+	this.defaultType = newType;
+}
+
 
 }

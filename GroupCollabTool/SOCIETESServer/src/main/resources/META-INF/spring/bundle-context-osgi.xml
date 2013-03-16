@@ -33,7 +33,7 @@
 		
 		<bean id="serMetamodel" class="org.societies.api.schema.servicelifecycle.model.Service">
 			<property name="authorSignature" value="CraigMatear" />
-			<property name="serviceDescription" value="dose stuff" />
+			<property name="serviceDescription" value="Collaberation Tool for software development projects" />
 			<property name="serviceName" value="Group Collab Tool" />
 			<property name="serviceType" value="THIRD_PARTY_SERVER" />
 			<property name="serviceCategory" value="collaberation" />

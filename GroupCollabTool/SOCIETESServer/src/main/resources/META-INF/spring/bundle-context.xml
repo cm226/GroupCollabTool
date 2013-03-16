@@ -15,8 +15,9 @@
   		class="org.societies.GroupCollabTool.testService" 
   		init-method="initService" 
   		destroy-method="onShutdown">
-   	 <property name="myCisManager" ref="cisManager"/>
-   	 <property name="commsMgr" ref="commsMgr"/>
+   	
+   	<!-- <property name="myCisManager" ref="cisManager"/> -->
+   	<!-- <property name="commsMgr" ref="commsMgr"/> -->
    	 
   </bean>
   
