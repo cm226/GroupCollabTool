@@ -14,11 +14,13 @@ import org.json.JSONObject;
 
 public class CGitComponent implements IUpdater {
 	
-	private String m_sGitURL;
+	private String m_sGitOwner;
+	private String m_sGitRepoName;
 	private String m_sLastSHA;
 	
-	public CGitComponent(String s_GitURL) {
-		m_sGitURL = s_GitURL;
+	public CGitComponent(String RepoOwner, String RepoName) {
+		m_sGitOwner = RepoOwner;
+		m_sGitRepoName = RepoName;
 	}
 	
 	public String GetLastCall()
@@ -32,7 +34,8 @@ public class CGitComponent implements IUpdater {
 		String content = null;
 		URLConnection connection = null;
 		try {
-		  connection =  new URL(m_sGitURL).openConnection();
+		  connection =  new URL("https://api.github.com/repos/" + m_sGitOwner
+				  + "/" + m_sGitRepoName + "/commits").openConnection();
 		  Scanner scanner = new Scanner(connection.getInputStream());
 		  scanner.useDelimiter("\\Z");
 		  content = scanner.next();
@@ -82,7 +85,8 @@ public class CGitComponent implements IUpdater {
 			e.printStackTrace();
 		}
 		String Comment = JSON_Object.getJSONObject("commit").getString("message");
-		URL.add("https://github.com/cm226/GroupCollabTool/commit/" + JSON_Object.getString("sha"));
+		URL.add("https://github.com/" + m_sGitOwner + "/" + m_sGitRepoName
+				+ "/commit/" + JSON_Object.getString("sha"));
 		
 		CVersionControlPost CurrentPost = new CVersionControlPost(
 				Commiter,
