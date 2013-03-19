@@ -1,4 +1,4 @@
-package com.SOCIETIES.Framework;
+package org.societies.GroupCollabTool.Connectors;
 
 import java.util.Date;
 

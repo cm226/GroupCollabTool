@@ -3,6 +3,9 @@ package org.societies.GroupCollabTool;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.societies.api.activity.IActivityFeedCallback;
 import org.societies.api.schema.activityfeed.MarshaledActivityFeed;
 import java.util.concurrent.Semaphore;
@@ -17,6 +20,7 @@ public class ActivityGetter implements IActivityFeedCallback
 	private final Semaphore available = new Semaphore(1);
 	
 	private ActivityDescription[] posts;
+	private static Logger LOG = LoggerFactory.getLogger(testService.class);
 	
 	public ActivityGetter()
 	{
@@ -24,6 +28,7 @@ public class ActivityGetter implements IActivityFeedCallback
 		catch (InterruptedException e)
 		{
 			isDirty = true;
+			e.printStackTrace();
 			// log errors
 		}
 	}
@@ -32,33 +37,46 @@ public class ActivityGetter implements IActivityFeedCallback
 	public void receiveResult(MarshaledActivityFeed arg0) 
 	{
 		if(this.isDirty)
+		{
+			LOG.info("Activity Result Is dirty");
 			return;
+		}
 		
-		 AddActivityResponse addResponce = arg0.getAddActivityResponse();
-		 if(addResponce.isResult())
-		 { 
-			List<MarshaledActivity> acts =  arg0.getGetActivitiesResponse().getMarshaledActivity();
+		 GetActivitiesResponse addResponce = arg0.getGetActivitiesResponse();
+		 
+		 LOG.info("addResponce : "+addResponce);
+
+			List<MarshaledActivity> acts =  addResponce.getMarshaledActivity();
 			posts = new ActivityDescription[acts.size()];
+			
+			LOG.info("Acts Size"+acts.size());
 			
 			Iterator<MarshaledActivity> actsIt = acts.iterator();
 			int i = 0;
 			while(actsIt.hasNext())
 			{
 				MarshaledActivity act = actsIt.next();
+				LOG.info("actor"+act.getActor());
+				LOG.info("obj"+act.getObject());
+				LOG.info("Targ"+act.getTarget());
 				posts[i] = new ActivityDescription(act.getActor(), act.getObject(), act.getTarget(), new Date());
 				i++;
 			}
 			
 			this.available.release();
-		 }
 	}
 	
 	
 	public ActivityDescription[] getActiviteys()
 	{
-		try{this.available.acquire();}
+		try
+		{
+			this.available.acquire();
+		}
 		catch (InterruptedException e)
 		{
+			System.out.println("unable to aquire lock ");
+			e.printStackTrace();
 			return new ActivityDescription[]{};
 			// log error
 		}

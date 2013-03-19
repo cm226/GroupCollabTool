@@ -20,14 +20,14 @@
 	 
 	 
 	 
-	<osgi:reference id="cisManager" interface="org.societies.api.cis.management.ICisManager" />
+	<osgi:reference id="cisManager" interface="org.societies.api.cis.management.ICisManager"></osgi:reference>
 	
 		<osgi:service ref="groupCollabTool" interface="org.societies.GroupCollabTool.ITestService">
 			<osgi:service-properties>
 			<entry key="TargetPlatform" value="SOCIETIES" />
 			<entry key="ServiceProvider" value="ICT-SOCIETIES" />
 			<entry key="ServiceMetaModel" value-ref="serMetamodel" />
-			<entry key="ServiceClient" value="http://localhost:8080/3p-services/GroupCollabToolClient-0.1.jar" />
+			<!--  <entry key="ServiceClient" value="http://localhost:8080/3p-services/GroupCollabToolClient-0.1.jar" />  -->
 			</osgi:service-properties>
 		</osgi:service>
 		
@@ -38,5 +38,7 @@
 			<property name="serviceType" value="THIRD_PARTY_SERVER" />
 			<property name="serviceCategory" value="collaberation" />
 		</bean>
+		
+		
 	  
 </beans>

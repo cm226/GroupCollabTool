@@ -17,6 +17,7 @@ public class testService implements ITestService
 	
 	private Updater updaterThread;
 	private Thread t1 ;
+	
 	public ICisManager getmyCisManager(){return this.myCisManager;}
 	public void setmyCisManager(ICisManager manager){this.myCisManager = manager;}
 	

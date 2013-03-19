@@ -1,5 +1,6 @@
 package org.societies.GroupCollabTool.Connectors.Dropbox;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,14 +14,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
+import org.societies.GroupCollabTool.CVersionControlPost;
+import org.societies.GroupCollabTool.Connectors.IUpdater;
+
+/*
 import com.dropbox.client2.jsonextract.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.societies.GroupCollabTool.CVersionControlPost;
-import org.societies.GroupCollabTool.Connectors.IUpdater;
-
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.DropboxAPI.DeltaEntry;
 import com.dropbox.client2.DropboxAPI.DeltaPage;
@@ -32,14 +35,15 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.WebAuthSession;
+*/
 
 
 
 
-public class DropboxConnector implements IUpdater
+public class DropboxConnector //implements IUpdater
 {
 
-
+	/*
 	final static private String APP_KEY = "5txslhtrgt5z6ax";
 	final static private String APP_SECRET = "5q8ojaml7fymqrn";
 	
@@ -149,6 +153,7 @@ public class DropboxConnector implements IUpdater
 	 * you only need to (and should) call it only once
 	 * 
 	 */
+/*
 	public void makeLink() throws Exception
 	{
 		AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
@@ -193,14 +198,14 @@ public class DropboxConnector implements IUpdater
 	@Override
 	public ArrayList<CVersionControlPost> GetPosts()
 	{
-		return getChanges();
+		return null;//getChanges();
 	}
 
 	@Override
 	public ArrayList<CVersionControlPost> GetPosts(String PreviousCall)
 	{
-		return getChanges();
+		return null; //getChanges();
 	}
-	
+	*/
 
 }

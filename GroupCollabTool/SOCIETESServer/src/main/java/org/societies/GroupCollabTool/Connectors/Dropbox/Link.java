@@ -1,10 +1,11 @@
 package org.societies.GroupCollabTool.Connectors.Dropbox;
 
-import com.dropbox.client2.session.AccessTokenPair;
+//import com.dropbox.client2.session.AccessTokenPair;
 
 
  public final class Link
     {
+	 /*
         public final String uid;
         public final AccessTokenPair accessToken;
 
@@ -13,4 +14,5 @@ import com.dropbox.client2.session.AccessTokenPair;
             this.uid = uid;
             this.accessToken = accessToken;
         }
+	*/
     }
