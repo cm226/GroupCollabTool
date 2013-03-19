@@ -1,5 +1,6 @@
 package com.SOCIETIES.GroupCollabTool.Comms;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.SOCIETIES.Framework.IActivity;
@@ -33,9 +34,9 @@ public abstract class ActivityBase implements IActivity
 	}
 
 	@Override
-	public String getLinks() {
+	public ArrayList<String> getLinks() {
 		// TODO Auto-generated method stub
-		return activity.getLink();
+		return activity.getLinks();
 	}
 
 	@Override

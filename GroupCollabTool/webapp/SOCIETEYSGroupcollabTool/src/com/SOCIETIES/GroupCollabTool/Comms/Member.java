@@ -5,11 +5,13 @@ package com.SOCIETIES.GroupCollabTool.Comms;
 public class Member //implements IMember
 {
 
-	public Member()
+	public Member(String UserID, String FirstName, String LastName, String EMail, String ImageURL)
 	{
-		m_sFirstName = "Bryce";
-		m_sLastName = "Dickson";
-		m_sEMail = "bfd1@hw.ac.uk";
+		m_sUserID = UserID;
+		m_sFirstName = FirstName;
+		m_sLastName = LastName;
+		m_sEMail = EMail;
+		m_sImage = ImageURL;
 	}
 	
 	String m_sUserID = new String();

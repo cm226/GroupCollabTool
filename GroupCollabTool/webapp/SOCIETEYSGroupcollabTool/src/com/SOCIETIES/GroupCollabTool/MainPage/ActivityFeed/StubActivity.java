@@ -1,5 +1,6 @@
 package com.SOCIETIES.GroupCollabTool.MainPage.ActivityFeed;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.SOCIETIES.Framework.IActivity;
@@ -25,9 +26,11 @@ public class StubActivity implements IActivity {
 	}
 
 	@Override
-	public String getLinks() {
+	public ArrayList<String> getLinks() {
 		// TODO Auto-generated method stub
-		return "https://www.google.co.uk/";
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add("www.google.com");
+		return temp;
 	}
 
 	@Override

@@ -15,13 +15,18 @@ public class ActivityFeed implements IPageComponent
 	
 	public ActivityFeed(String contentType)
 	{
-		SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
+		/*SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
 		ActivityDescription[] activitys =  intrfacelyr.getActiviteys(contentType);
 		
 		if(activitys != null)
 		{
 			for(int i = 0 ; i < activitys.length; i++)
 				this.m_activities.add(new Activity(activitys[i]));
+		}*/
+		
+		for(int i = 0 ; i < 10; i++)
+		{
+			m_activities.add(new Activity());
 		}
 	}
 	
@@ -39,8 +44,18 @@ public class ActivityFeed implements IPageComponent
 			
 			out.println("\t\t\t<div id=\"post\">");
 			out.println("\t\t\t\t<img src=\"" + activity.getImageURL() + "\" class=\"profile\">");
-			out.println("\t\t\t\t<b>" + activity.getType() + ":</b> " + activity.getdescription());
-			out.println("\t\t\t\t<h6>  - Posted 14/02/2013  </h6>");
+			out.println("\t\t\t\t<b>" + activity.getType() + ":</b> " + activity.getdescription() + "<br>");
+			out.println("\t\t\t\tRelated Links: ");
+			
+			if(activity.getLinks().size() != 0)
+				out.println("<a href=\"" + activity.getLinks().get(0) + "\">" + 1 + "</a>");
+			
+			for(int i = 1; i < activity.getLinks().size(); i++)
+			{
+				out.println(", <a href=\"" + activity.getLinks().get(i) + "\">" + (i+1) + "</a>");
+			}
+			
+			out.println("\t\t\t\t<h6>  - Posted " + activity.getDate() +  "  </h6>");
 			out.println("\t\t\t</div> <!-- post -->");
 			out.println("");
 		}
