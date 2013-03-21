@@ -27,7 +27,7 @@
 			<entry key="TargetPlatform" value="SOCIETIES" />
 			<entry key="ServiceProvider" value="ICT-SOCIETIES" />
 			<entry key="ServiceMetaModel" value-ref="serMetamodel" />
-			<!--  <entry key="ServiceClient" value="http://localhost:8080/3p-services/GroupCollabToolClient-0.1.jar" />  -->
+			<entry key="ServiceClient" value="http://localhost:8080/3p-services/GroupCollabToolClient-0.1.jar" /> 
 			</osgi:service-properties>
 		</osgi:service>
 		

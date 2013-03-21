@@ -35,15 +35,14 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.WebAuthSession;
+
+
 */
-
-
 
 
 public class DropboxConnector //implements IUpdater
 {
-
-	/*
+/*
 	final static private String APP_KEY = "5txslhtrgt5z6ax";
 	final static private String APP_SECRET = "5q8ojaml7fymqrn";
 	
@@ -206,6 +205,6 @@ public class DropboxConnector //implements IUpdater
 	{
 		return null; //getChanges();
 	}
-	*/
 
+*/
 }

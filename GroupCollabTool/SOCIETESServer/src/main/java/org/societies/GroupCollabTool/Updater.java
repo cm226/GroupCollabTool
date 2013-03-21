@@ -12,13 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
-import org.societies.Comms.RMIServer;
+
 import org.societies.api.activity.IActivity;
 import org.societies.api.activity.IActivityFeed;
 import org.societies.api.cis.management.ICis;
 import org.societies.api.cis.management.ICisManager;
 
-import org.societies.Comms.RMIServer.*;
 import org.societies.GroupCollabTool.Connectors.IUpdater;
 //import org.societies.GroupCollabTool.Connectors.Dropbox.DropboxConnector;
 import org.societies.GroupCollabTool.Connectors.Git.CGitComponent;
@@ -36,7 +35,6 @@ public class Updater implements Runnable
 	{
 		this.manager = cisManager;
 		this.log  = log;
-		this.initRMI();
 		this.connectors = new ArrayList<IUpdater>();
 		
 		this.connectors.add(new CGitComponent("cm226","GroupCollabTool"));
@@ -53,21 +51,21 @@ public class Updater implements Runnable
 			{
 				System.out.println("have cis: "+cisList.get(0).getName());
 				
-//				Iterator<IUpdater> connectorIt = this.connectors.iterator();
-//				while(connectorIt.hasNext())
-//				{
-//					IUpdater updater = connectorIt.next();
-//					ArrayList<CVersionControlPost> posts =  updater.GetPosts();
-//					Iterator<CVersionControlPost> postIt = posts.iterator();
-//					while(postIt.hasNext())
-//						addToActivityFeed(cisList.get(0).getActivityFeed(),postIt.next());
-//					
-//					
-//				}
-				ArrayList<String> changes = new ArrayList<String>();
+				Iterator<IUpdater> connectorIt = this.connectors.iterator();
+				while(connectorIt.hasNext())
+				{
+					IUpdater updater = connectorIt.next();
+					ArrayList<CVersionControlPost> posts =  updater.GetPosts();
+					Iterator<CVersionControlPost> postIt = posts.iterator();
+					while(postIt.hasNext())
+						addToActivityFeed(cisList.get(0).getActivityFeed(),postIt.next());
+					
+					
+				}
+				/*ArrayList<String> changes = new ArrayList<String>();
 				changes.add("change");
 				CVersionControlPost vcp = new CVersionControlPost("User", new Date(), "desc", changes);
-				addToActivityFeed(cisList.get(0).getActivityFeed(),vcp);
+				addToActivityFeed(cisList.get(0).getActivityFeed(),vcp);*/
 				
 			
 				log.info("added to activity feed");
@@ -95,24 +93,6 @@ public class Updater implements Runnable
 		this.running = false;
 	}
 	
-	private void initRMI()
-	{
-		try {
-	            RMIServer obj = new RMIServer(manager);
-	            IServer stub = (IServer) UnicastRemoteObject.exportObject((Remote) obj, 0);
-
-	            // Bind the remote object's stub in the registry
-	            Registry registry = LocateRegistry.getRegistry();
-	            registry.bind("IServer", stub);
-
-	        } catch (Exception e) {
-	        	
-	            log.error(" Group CollabTool RMI Server exception: " + e.toString());
-	            e.printStackTrace();
-	        }
-	}
-	
-
 	
 	private void addToActivityFeed(IActivityFeed activityFeed, CVersionControlPost change)
 	{

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.societies.GroupCollabTool.Comms.*;
+import org.societies.api.cis.management.ICisManager;
 import org.societies.api.comm.xmpp.interfaces.ICommManager;
 import org.societies.api.css.devicemgmt.display.IDisplayableService;
 import org.societies.api.identity.IIdentity;
@@ -32,6 +33,7 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 	private String myServiceType;
 	private List<String> myServiceTypes;
 	private RMIServer rmiServer;
+	private ICisManager myCisManager;
 	
 	private static Logger LOG = LoggerFactory.getLogger(GroupCollabToolClient.class);
 	
@@ -47,13 +49,13 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 		myServiceTypes = new ArrayList<String>();
 		myServiceTypes.add(myServiceType);
 		
-		//initRMI();
+		initRMI();
 	}
 	
 	private void initRMI()
 	{
 		try {
-				rmiServer = new RMIServer(uam,userID, myServiceID, myServiceTypes);
+				rmiServer = new RMIServer(uam,userID, myServiceID, myServiceTypes,myCisManager);
 	            IServer stub = (IServer) UnicastRemoteObject.exportObject((Remote) rmiServer, 0);
 
 	            // Bind the remote object's stub in the registry
@@ -120,6 +122,9 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 		this.servics = serv;
 	}
 
+	
+	public ICisManager getmyCisManager(){return this.myCisManager;}
+	public void setmyCisManager(ICisManager manager){this.myCisManager = manager;}
 
 
 	

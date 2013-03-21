@@ -1,5 +1,6 @@
 package org.societies.GroupCollabTool;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -59,7 +60,13 @@ public class ActivityGetter implements IActivityFeedCallback
 				LOG.info("actor"+act.getActor());
 				LOG.info("obj"+act.getObject());
 				LOG.info("Targ"+act.getTarget());
-				posts[i] = new ActivityDescription(act.getActor(), act.getObject(), act.getTarget(), new Date());
+				ArrayList<String> targets = new ArrayList<String>();
+				String[] links = act.getTarget().split(",");
+				int linkCnt = 0;
+				for(linkCnt=0; linkCnt< links.length; linkCnt++)
+					targets.add(links[linkCnt]);
+				
+				posts[i] = new ActivityDescription(act.getActor(), act.getObject(),targets , new Date());
 				i++;
 			}
 			

@@ -7,6 +7,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.societies.GroupCollabtoolClient.GroupCollabToolClient;
+import org.societies.api.activity.IActivity;
+import org.societies.api.activity.IActivityFeed;
+import org.societies.api.cis.management.ICis;
+import org.societies.api.cis.management.ICisManager;
 import org.societies.api.identity.IIdentity;
 import org.societies.api.personalisation.model.IAction;
 import org.societies.api.personalisation.model.Action;
@@ -14,85 +23,86 @@ import org.societies.api.useragent.monitoring.IUserActionMonitor;
 
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.ActivityDescription;
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
+import com.SOCIETIES.GroupCollabTool.Comms.Shared.IMember;
 
 import org.societies.api.schema.servicelifecycle.model.ServiceResourceIdentifier;
 
-public class RMIServer implements IServer
+public class RMIServer  implements IServer 
 {
 	private IUserActionMonitor uam;
 	private IIdentity userID;
 	private String defaultType;
 	private ServiceResourceIdentifier myServiceID;
 	private List<String> myServiceTypes;
+	private  ICisManager manager;
+	private static Logger LOG = LoggerFactory.getLogger(GroupCollabToolClient.class);
 	
 	
-public RMIServer(IUserActionMonitor uam, IIdentity userID, ServiceResourceIdentifier serviceID, List<String> myServiceTypes)
+public RMIServer(IUserActionMonitor uam,
+				IIdentity userID,
+				ServiceResourceIdentifier serviceID,
+				List<String> myServiceTypes,
+				ICisManager manager)
 {
 	this.uam = uam;
 	this.userID = userID;
 	this.myServiceID = serviceID;
 	this.myServiceTypes = myServiceTypes;
-}
-
-@Override
-public ActivityDescription[] getActivitys() throws RemoteException
-{
-	return this.getActivitysBase(this.defaultType);
-} 
-
-
-@Override
-public ActivityDescription[] getActivitys(String type) throws RemoteException
-{
-	
-	IAction action = new Action(myServiceID, myServiceTypes.get(0), "contentType",type);
-	this.uam.monitor(this.userID, action);
-	
-	return this.getActivitysBase(type);
-	
-}
-
-private ActivityDescription[] getActivitysBase(String type)
-{
-	
-	ArrayList<ActivityDescription> activitys = new ArrayList<ActivityDescription>();
-	System.out.println("requesting type: "+type);
-	
-	if(type.compareTo("Documents")==0)
-	{
-		activitys.add(new ActivityDescription("DropBox", "project plan.xls edited", "www.google.com", new Date()));
-		activitys.add(new ActivityDescription("DropBox", "User Guide.doc was edited", "www.google.com", new Date()));
-	}
-	else if(type.compareTo("Code")==0)
-	{
-		activitys.add(new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date()));
-		activitys.add(new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date()));
-	}
-	else
-	{
-		activitys.add(new ActivityDescription("DropBox", "project plan.xls edited", "www.google.com", new Date()));
-		activitys.add(new ActivityDescription("DropBox", "User Guide.doc was edited", "www.google.com", new Date()));
-		activitys.add(new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date()));
-		activitys.add(new ActivityDescription("Git","blargh git thing commit blargh","www.google.com",new Date()));
-		
-	}
-	//ActivityDescription[] actArr = (ActivityDescription[]) activitys.toArray(); // for some reason this threw an invalid cast exception on the webapp side 
-	
-	ActivityDescription[] actArr = new ActivityDescription[activitys.size()];
-	Iterator<ActivityDescription> activityIt = activitys.iterator();
-	int count = 0;
-	while(activityIt.hasNext())
-	{
-		actArr[count] = activityIt.next();
-		count++;
-	}
-	
-	return actArr;
+	this.manager = manager;
 }
 
 public void updateDefaultType(String newType)
 {
 	this.defaultType = newType;
+}
+
+public ActivityDescription[] getActivitys() throws RemoteException
+{
+	List<ICis> cisList =  manager.getCisList();
+	
+	ActivityGetter activityGetter = new ActivityGetter();
+	
+	Double milliSecondsSinceepoch = new Double((new Date()).getTime());
+	cisList.get(0).getActivityFeed().getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
+	
+	return activityGetter.getActiviteys(); // blocking call
+}
+
+public ActivityDescription[] getActivitys(String arg0) throws RemoteException
+{
+	List<ICis> cisList =  manager.getCisList();
+	LOG.info("getting Activities");
+	ActivityGetter activityGetter = new ActivityGetter();
+	
+	Long milliSecondsSinceepoch = System.currentTimeMillis();//new Date().getTime();
+	
+	if(cisList.size() == 0)
+		return new ActivityDescription[]{};
+		
+	IActivityFeed actFeed = cisList.get(0).getActivityFeed();
+	actFeed.getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
+	
+	LOG.info("Entering BlockingCall");
+	ActivityDescription[] act = activityGetter.getActiviteys(); // blocking call
+	LOG.info("Exiting blocking call with: "+act.length);
+	
+	return act;
+}
+
+public void postToFeed(IMember User, String Message) throws RemoteException
+{
+	List<ICis> cisList =  manager.getCisList();
+	if(cisList.size() > 0)
+	{
+		IActivityFeed activityFeed = cisList.get(0).getActivityFeed();
+		
+		IActivity newActivity1 = activityFeed.getEmptyIActivity(); // get an empty activity interface so you can use to fill up with the new activity data
+		newActivity1.setActor(User.GetID());
+		newActivity1.setObject(Message);
+		newActivity1.setVerb(new Date().toString());
+		activityFeed.addActivity(newActivity1, new UpdaterCallback());
+	}
+	
 }
 
 

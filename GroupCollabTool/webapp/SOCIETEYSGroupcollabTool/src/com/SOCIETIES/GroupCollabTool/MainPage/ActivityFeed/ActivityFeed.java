@@ -15,19 +15,19 @@ public class ActivityFeed implements IPageComponent
 	
 	public ActivityFeed(String contentType)
 	{
-		/*SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
+		SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
 		ActivityDescription[] activitys =  intrfacelyr.getActiviteys(contentType);
 		
 		if(activitys != null)
 		{
 			for(int i = 0 ; i < activitys.length; i++)
 				this.m_activities.add(new Activity(activitys[i]));
-		}*/
+		}
 		
-		for(int i = 0 ; i < 10; i++)
+		/*for(int i = 0 ; i < 10; i++)
 		{
 			m_activities.add(new Activity());
-		}
+		}*/
 	}
 	
 	@Override

@@ -17,6 +17,7 @@
   		<property name="uam" ref="uam"/>
   		<property name="commsMgr" ref="commsMgr"/>
   		<property name="servics" ref="servics"/>
+  		<property name="myCisManager" ref="cisManager"/>
    	 
   </bean>
   

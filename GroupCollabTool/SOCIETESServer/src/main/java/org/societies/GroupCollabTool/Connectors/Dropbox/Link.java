@@ -5,7 +5,7 @@ package org.societies.GroupCollabTool.Connectors.Dropbox;
 
  public final class Link
     {
-	 /*
+/*
         public final String uid;
         public final AccessTokenPair accessToken;
 
@@ -13,6 +13,5 @@ package org.societies.GroupCollabTool.Connectors.Dropbox;
         {
             this.uid = uid;
             this.accessToken = accessToken;
-        }
-	*/
+        }*/
     }

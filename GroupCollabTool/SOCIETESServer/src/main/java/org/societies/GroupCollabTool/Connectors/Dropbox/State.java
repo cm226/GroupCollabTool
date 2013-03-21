@@ -19,13 +19,13 @@ import com.dropbox.client2.jsonextract.JsonThing;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 */
-	
+
 	 // ------------------------------------------------------------------------
     // State model (load+save to JSON)
 
     public class State
     {
-    		/*
+/*
         public final AppKeyPair appKey;
         public final Map<String,AccessTokenPair> links = new HashMap<String,AccessTokenPair>();
         public String cursor;
