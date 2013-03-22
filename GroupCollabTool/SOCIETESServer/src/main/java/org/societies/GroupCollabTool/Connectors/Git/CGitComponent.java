@@ -36,14 +36,36 @@ public class CGitComponent implements IUpdater {
 	{
 		String content = null;
 		URLConnection connection = null;
-		try {
-		  connection =  new URL("https://api.github.com/repos/" + m_sGitOwner
-				  + "/" + m_sGitRepoName + "/commits").openConnection();
-		  Scanner scanner = new Scanner(connection.getInputStream());
-		  scanner.useDelimiter("\\Z");
-		  content = scanner.next();
-		}catch ( Exception ex ) {
-		    ex.printStackTrace();
+		
+		int ArrayStart = 0;
+		
+		if(m_sLastSHA == null)
+		{
+			ArrayStart = 0;
+		
+			try {
+			  connection =  new URL("https://api.github.com/repos/" + m_sGitOwner
+					  + "/" + m_sGitRepoName + "/commits").openConnection();
+			  Scanner scanner = new Scanner(connection.getInputStream());
+			  scanner.useDelimiter("\\Z");
+			  content = scanner.next();
+			}catch ( Exception ex ) {
+				ex.printStackTrace();
+			}
+		}
+		else
+		{
+			ArrayStart = 1;
+			
+			try {
+			  connection =  new URL("https://api.github.com/repos/" + m_sGitOwner
+					  + "/" + m_sGitRepoName + "/commits?sha=" + m_sLastSHA).openConnection();
+			  Scanner scanner = new Scanner(connection.getInputStream());
+			  scanner.useDelimiter("\\Z");
+			  content = scanner.next();
+			}catch ( Exception ex ) {
+				ex.printStackTrace();
+			}
 		}
 		
 		ArrayList<CVersionControlPost> hVersionControlPosts = new ArrayList<CVersionControlPost>();
@@ -51,14 +73,17 @@ public class CGitComponent implements IUpdater {
 		JSONArray MainArray = new JSONArray(content);
 		JSONObject hCurrentJson = null;
 		
-		for(int i=0; i<MainArray.length(); i++)
+		for(int i=ArrayStart; i<MainArray.length(); i++)
 		{
 			hCurrentJson = (JSONObject)MainArray.get(i);
 			
 			hVersionControlPosts.add(readPost(hCurrentJson));
 		}
+		 
+		hCurrentJson = (JSONObject)MainArray.get(MainArray.length() - 1);
+		m_sLastSHA = hCurrentJson.getString("sha");
+
 		
-		hVersionControlPosts.get(hVersionControlPosts.size());
 		return hVersionControlPosts;
 	}
 	
@@ -72,14 +97,15 @@ public class CGitComponent implements IUpdater {
 	private CVersionControlPost readPost(JSONObject JSON_Object)
 	{
 		SimpleDateFormat formatter;
-		formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		
 		ArrayList<String> URL = new ArrayList<String>();
 		
-		String Commiter = JSON_Object.getJSONObject("commit").getJSONObject("committer").getString("date");
+		String Commiter = JSON_Object.getJSONObject("commit").getJSONObject("committer").getString("email");
 		Date CommitDate = new Date();
 		try {
-			CommitDate = formatter.parse(JSON_Object.getJSONObject("commit").getJSONObject("committer").getString("date").substring(0, 24));
+			
+			CommitDate = formatter.parse(JSON_Object.getJSONObject("commit").getJSONObject("committer").getString("date").substring(0, 20));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,9 +118,9 @@ public class CGitComponent implements IUpdater {
 				+ "/commit/" + JSON_Object.getString("sha"));
 		
 		CVersionControlPost CurrentPost = new CVersionControlPost(
-				Commiter,
+				"Git",
 				CommitDate,
-				Comment,
+				"("+Commiter+")"+Comment,
 				URL
 			);
 		

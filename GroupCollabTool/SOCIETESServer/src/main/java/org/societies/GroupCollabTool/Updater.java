@@ -50,20 +50,23 @@ public class Updater implements Runnable
 			if(cisList.size() > 0)
 			{
 				System.out.println("have cis: "+cisList.get(0).getName());
-				
+				System.out.println("Num Updaters "+this.connectors.size());
 				Iterator<IUpdater> connectorIt = this.connectors.iterator();
+				
 				while(connectorIt.hasNext())
 				{
 					IUpdater updater = connectorIt.next();
 					ArrayList<CVersionControlPost> posts =  updater.GetPosts();
+					log.info("updater foind "+posts.size()+" updates");
 					Iterator<CVersionControlPost> postIt = posts.iterator();
 					while(postIt.hasNext())
 						addToActivityFeed(cisList.get(0).getActivityFeed(),postIt.next());
 					
 					
 				}
+				
 				/*ArrayList<String> changes = new ArrayList<String>();
-				changes.add("change");
+				changes.add("http://www.google.com");
 				CVersionControlPost vcp = new CVersionControlPost("User", new Date(), "desc", changes);
 				addToActivityFeed(cisList.get(0).getActivityFeed(),vcp);*/
 				
@@ -77,7 +80,7 @@ public class Updater implements Runnable
 			
 			try 
 			{
-				Thread.sleep(10000);
+				Thread.sleep(100000);
 			}
 			catch (InterruptedException e)
 			{
@@ -98,8 +101,10 @@ public class Updater implements Runnable
 	{
 
 		IActivity newActivity1 = activityFeed.getEmptyIActivity(); // get an empty activity interface so you can use to fill up with the new activity data
+		log.info("setting actor: "+change.GetUserID());
 		newActivity1.setActor(change.GetUserID());
 		newActivity1.setObject(change.GetDescription());
+		log.info("setting desk: "+change.GetDescription());
 		
 		StringBuilder sb = new StringBuilder();
 		ArrayList<String> links = change.GetFilesChanged();
@@ -117,12 +122,14 @@ public class Updater implements Runnable
 			
 			log.info("csvLinkLen: "+csvLinks.length());
 			csvLinks = csvLinks.substring(0, csvLinks.length()-1); // remove last comma
+			
 		}
 		else csvLinks = "";
 		
-		
+		log.info("links: "+csvLinks);
 		newActivity1.setTarget(csvLinks);
 		newActivity1.setVerb(change.GetPostedDate().toString());
+		log.info("verb: "+change.GetPostedDate().toString());
  
 		activityFeed.addActivity(newActivity1, new UpdaterCallback());
 	}

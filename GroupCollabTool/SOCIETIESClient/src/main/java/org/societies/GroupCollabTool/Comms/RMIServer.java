@@ -26,13 +26,14 @@ import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IMember;
 
 import org.societies.api.schema.servicelifecycle.model.ServiceResourceIdentifier;
+import org.societies.api.services.IServices;
 
 public class RMIServer  implements IServer 
 {
 	private IUserActionMonitor uam;
 	private IIdentity userID;
 	private String defaultType;
-	private ServiceResourceIdentifier myServiceID;
+	private IServices servics;
 	private List<String> myServiceTypes;
 	private  ICisManager manager;
 	private static Logger LOG = LoggerFactory.getLogger(GroupCollabToolClient.class);
@@ -40,13 +41,13 @@ public class RMIServer  implements IServer
 	
 public RMIServer(IUserActionMonitor uam,
 				IIdentity userID,
-				ServiceResourceIdentifier serviceID,
+				IServices serviceID,
 				List<String> myServiceTypes,
 				ICisManager manager)
 {
 	this.uam = uam;
 	this.userID = userID;
-	this.myServiceID = serviceID;
+	this.servics = serviceID;
 	this.myServiceTypes = myServiceTypes;
 	this.manager = manager;
 }
@@ -60,26 +61,37 @@ public ActivityDescription[] getActivitys() throws RemoteException
 {
 	List<ICis> cisList =  manager.getCisList();
 	
-	ActivityGetter activityGetter = new ActivityGetter();
+	ActivityGetter activityGetter = new ActivityGetter(this.defaultType);
 	
-	Double milliSecondsSinceepoch = new Double((new Date()).getTime());
+	Long milliSecondsSinceepoch = System.currentTimeMillis();
 	cisList.get(0).getActivityFeed().getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
 	
 	return activityGetter.getActiviteys(); // blocking call
 }
 
-public ActivityDescription[] getActivitys(String arg0) throws RemoteException
+public ActivityDescription[] getActivitys(String type) throws RemoteException
 {
-	List<ICis> cisList =  manager.getCisList();
-	LOG.info("getting Activities");
-	ActivityGetter activityGetter = new ActivityGetter();
+	ServiceResourceIdentifier myServiceID = this.servics.getMyServiceId(GroupCollabToolClient.class);
+	LOG.info("serviceID: "+myServiceID);
+	LOG.info("type: "+type);
+	LOG.info("serviceTypes: "+myServiceTypes.get(0));
+	LOG.info("moniter: "+this.uam);
 	
-	Long milliSecondsSinceepoch = System.currentTimeMillis();//new Date().getTime();
+	IAction action = new Action(myServiceID, myServiceTypes.get(0), "contentType",type);
+	this.uam.monitor(this.userID, action);
+	
+	List<ICis> cisList =  manager.getCisList();
+	LOG.info("getting Activities: "+type);
+	ActivityGetter activityGetter = new ActivityGetter(type);
+	
+	Long milliSecondsSinceepoch = System.currentTimeMillis();
 	
 	if(cisList.size() == 0)
 		return new ActivityDescription[]{};
 		
+	LOG.info("getting from: "+cisList.get(0).getName());
 	IActivityFeed actFeed = cisList.get(0).getActivityFeed();
+	
 	actFeed.getActivities("0 "+milliSecondsSinceepoch.toString(),activityGetter);
 	
 	LOG.info("Entering BlockingCall");

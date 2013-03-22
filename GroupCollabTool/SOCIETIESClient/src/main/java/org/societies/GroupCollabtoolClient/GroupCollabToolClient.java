@@ -28,7 +28,6 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 	private IUserActionMonitor uam;
 	private IIdentity userID;
 	private ICommManager commsMgr;
-	private ServiceResourceIdentifier myServiceID;
 	private IServices servics;
 	private String myServiceType;
 	private List<String> myServiceTypes;
@@ -42,7 +41,7 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 	{
 		LOG.info("Client started");
 		userID = commsMgr.getIdManager().getThisNetworkNode();
-		//myServiceID = this.servics.getMyServiceId(this);
+		this.servics.getMyServiceId(GroupCollabToolClient.class);
 		
 		myServiceType = "Collaberation";
 		
@@ -55,7 +54,7 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 	private void initRMI()
 	{
 		try {
-				rmiServer = new RMIServer(uam,userID, myServiceID, myServiceTypes,myCisManager);
+				rmiServer = new RMIServer(uam,userID, this.servics, myServiceTypes,myCisManager);
 	            IServer stub = (IServer) UnicastRemoteObject.exportObject((Remote) rmiServer, 0);
 
 	            // Bind the remote object's stub in the registry
@@ -78,7 +77,7 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 	
 	public ServiceResourceIdentifier getServiceIdentifier()
 	{
-		return this.myServiceID;
+		return this.servics.getMyServiceId(GroupCollabToolClient.class);
 	}
 	
 	public String getServiceType()
@@ -93,7 +92,9 @@ public class GroupCollabToolClient implements IClient, IActionConsumer
 
 	public boolean setIAction(IIdentity arg0, IAction arg1)
 	{
+		
 		String param = arg1.getparameterName();
+		LOG.info("action: "+param + " set to: "+arg1.getvalue());
 		if(param.compareToIgnoreCase("contentType") == 0)
 		{
 			String value = arg1.getvalue();
