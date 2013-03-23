@@ -116,6 +116,8 @@ body,html
 	                -ms-transition: all 1s ease;
 	                transition: all 1s ease;
 					
+					font: Tahoma, Helvetica, Ariel, Sans-Serif;
+					
 					float: none;
                             margin: 0 10px;                            
                             border-bottom: 1px solid #191614;
@@ -255,4 +257,15 @@ hr
 	color: #000000;
 	background-color: #000000;
 	height: 1px;
+}
+
+.box
+{
+	font: Tahoma, Helvetica, Ariel, Sans-Serif;
+	font-size:16px;
+	color:#333;
+	padding:5px;
+	background-color:#CCC;
+	border:2px solid #999;
+	width:735px;
 }
