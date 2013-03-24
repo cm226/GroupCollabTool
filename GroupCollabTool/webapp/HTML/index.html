@@ -19,7 +19,24 @@ function feedPost()
 	var feedPost = document.getElementById('feedpost');
 	var Context= document.getElementById('selectVal');
 	
-	window.location = 'file:///C:/Users/Bryce/Dropbox/University/5th%20Year/SOCIETIES/GroupCollabTool/GroupCollabTool/webapp/HTML/index.html?stype='+Context.value+"&feedpost="+feedPost.value;
+	var NextPage = 'file:///C:/Users/Bryce/Dropbox/University/5th%20Year/SOCIETIES/GroupCollabTool/GroupCollabTool/webapp/HTML/index.html';
+	
+	NextPage += "?stype="+Context.value+"&feedpost="+feedPost.value;
+	
+	if((feedPost.value.length > 0) && (Context.value.length > 0))
+	{
+		NextPage += "?stype="+Context.value+"&feedpost="+feedPost.value;
+	}
+	else if(feedPost.value.length > 0)
+	{
+		NextPage += "?feedpost="+feedPost.value;
+	}
+	else if(Context.value.length > 0)
+	{
+		NextPage += "?stype="+Context.value;
+	}
+		
+	window.location = NextPage;
 }
 
 </script> 
