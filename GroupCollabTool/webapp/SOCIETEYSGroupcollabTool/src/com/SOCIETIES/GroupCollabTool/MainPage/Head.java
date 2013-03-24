@@ -32,8 +32,6 @@ public class Head implements IPageComponent
 		out.println("");
 		out.println("var NextPage = 'http://localhost:8090/SOCIETEYSGroupcollabTool/CollabToolServlet';");
 		out.println("");
-		out.println("NextPage += \"?stype=\"+Context.value+\"&feedpost=\"+feedPost.value;");
-		out.println("");
 		out.println("if((feedPost.value.length > 0) && (Context.value.length > 0))");
 		out.println("{");
 		out.println("NextPage += \"?stype=\"+Context.value+\"&feedpost=\"+feedPost.value;");
