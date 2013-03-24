@@ -1,6 +1,7 @@
 package org.societies.GroupCollabTool.Comms;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -103,15 +104,23 @@ public ActivityDescription[] getActivitys(String type) throws RemoteException
 
 public void postToFeed(IMember User, String Message) throws RemoteException
 {
+	LOG.info("Positing to feed");
 	List<ICis> cisList =  manager.getCisList();
 	if(cisList.size() > 0)
 	{
 		IActivityFeed activityFeed = cisList.get(0).getActivityFeed();
 		
 		IActivity newActivity1 = activityFeed.getEmptyIActivity(); // get an empty activity interface so you can use to fill up with the new activity data
-		newActivity1.setActor(User.GetID());
+		newActivity1.setActor("User");
 		newActivity1.setObject(Message);
-		newActivity1.setVerb(new Date().toString());
+		
+		Date now= new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String dateStr = sdf.format(now);
+		
+		newActivity1.setVerb(dateStr);
+		newActivity1.setTarget("");
+		
 		activityFeed.addActivity(newActivity1, new UpdaterCallback());
 	}
 	

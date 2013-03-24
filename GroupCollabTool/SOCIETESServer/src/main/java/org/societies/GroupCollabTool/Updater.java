@@ -6,6 +6,7 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ import org.societies.api.cis.management.ICis;
 import org.societies.api.cis.management.ICisManager;
 
 import org.societies.GroupCollabTool.Connectors.IUpdater;
-//import org.societies.GroupCollabTool.Connectors.Dropbox.DropboxConnector;
+import org.societies.GroupCollabTool.Connectors.Dropbox.DropboxConnector;
 import org.societies.GroupCollabTool.Connectors.Git.CGitComponent;
 
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
@@ -38,7 +39,7 @@ public class Updater implements Runnable
 		this.connectors = new ArrayList<IUpdater>();
 		
 		this.connectors.add(new CGitComponent("cm226","GroupCollabTool"));
-		//this.connectors.add(new DropboxConnector());
+		this.connectors.add(new DropboxConnector());
 	}
 
 	@Override
@@ -65,12 +66,6 @@ public class Updater implements Runnable
 					
 				}
 				
-				/*ArrayList<String> changes = new ArrayList<String>();
-				changes.add("http://www.google.com");
-				CVersionControlPost vcp = new CVersionControlPost("User", new Date(), "desc", changes);
-				addToActivityFeed(cisList.get(0).getActivityFeed(),vcp);*/
-				
-			
 				log.info("added to activity feed");
 			}
 			else
@@ -128,7 +123,10 @@ public class Updater implements Runnable
 		
 		log.info("links: "+csvLinks);
 		newActivity1.setTarget(csvLinks);
-		newActivity1.setVerb(change.GetPostedDate().toString());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String dateStr = sdf.format(change.GetPostedDate());
+		newActivity1.setVerb(dateStr);
 		log.info("verb: "+change.GetPostedDate().toString());
  
 		activityFeed.addActivity(newActivity1, new UpdaterCallback());

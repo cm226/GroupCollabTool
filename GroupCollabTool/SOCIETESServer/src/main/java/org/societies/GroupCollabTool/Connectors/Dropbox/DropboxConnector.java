@@ -18,7 +18,7 @@ import java.util.Map;
 import org.societies.GroupCollabTool.CVersionControlPost;
 import org.societies.GroupCollabTool.Connectors.IUpdater;
 
-/*
+
 import com.dropbox.client2.jsonextract.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,35 +37,36 @@ import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.WebAuthSession;
 
 
-*/
 
 
-public class DropboxConnector //implements IUpdater
+
+public class DropboxConnector implements IUpdater
 {
-/*
+
 	final static private String APP_KEY = "5txslhtrgt5z6ax";
 	final static private String APP_SECRET = "5q8ojaml7fymqrn";
 	
 	final static private AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
 	
-	public static final String STATE_FILE = "D:\\programming\\SOCIETIES\\GroupCollabTool\\GroupCollabTool\\SOCIETESServer\\src\\main\\java\\org\\societies\\GroupCollabTool\\Connectors\\Dropbox\\GroupCollabTool.json";
-	
+	public static final String STATE_FILE = "D:\\programming\\SOCIETIES\\DropboxTest\\src\\GroupCollabTool2.json";
+	private String cursor = null;
 	
 	// In the class declaration section:
 	private DropboxAPI<WebAuthSession> mDBApi;
 	
 	public DropboxConnector()
 	{
+		
 		// first time authentication
-			File stateFile = new File(STATE_FILE);
-			 if(!stateFile.exists())
-				try {
-					makeLink();
+			//File stateFile = new File(STATE_FILE);
+			// if(!stateFile.exists())
+				/*try {
+				makeLink();
 				} catch (Exception e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 	}
 	
 	public ArrayList<CVersionControlPost> getChanges()
@@ -85,7 +86,8 @@ public class DropboxConnector //implements IUpdater
 			do
 			{
 				//deltaEntrys = mDBApi.delta(null);
-				deltaEntrys = mDBApi.delta(state.cursor);
+				System.out.println("dropboxupdater is calling it with "+this.cursor);
+				deltaEntrys = mDBApi.delta(this.cursor);
 				List<DeltaEntry<Entry>> list = deltaEntrys.entries;
 				Iterator<DeltaEntry<Entry>> entryIt = list.iterator();
 				while(entryIt.hasNext())
@@ -96,7 +98,7 @@ public class DropboxConnector //implements IUpdater
 				state.cursor = deltaEntrys.cursor;
 			}
 			while (deltaEntrys.hasMore);
-			
+			this.cursor =  state.cursor;
 			
 			state.save(STATE_FILE);
 			return posts;
@@ -152,7 +154,7 @@ public class DropboxConnector //implements IUpdater
 	 * you only need to (and should) call it only once
 	 * 
 	 */
-/*
+
 	public void makeLink() throws Exception
 	{
 		AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
@@ -160,13 +162,13 @@ public class DropboxConnector //implements IUpdater
 		
 		 
 		 WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-		 
+		
 		 mDBApi = new DropboxAPI<WebAuthSession>(session);
-		 
 		 
 	        // Make the user log in and authorize us.
 	        WebAuthSession.WebAuthInfo info = null;
-			try {
+			try 
+			{
 				info = session.getAuthInfo();
 			} catch (DropboxException e) {
 				// TODO Auto-generated catch block
@@ -174,15 +176,11 @@ public class DropboxConnector //implements IUpdater
 			}
 	        System.out.println("1. Go to: " + info.url);
 	        System.out.println("2. Allow access to this app.");
-	        System.out.println("3. Press ENTER.");
+	        System.out.println("you have 100sec");
 	        
-	        try {
-	            while (System.in.read() != '\n') {}
-	        }
-	        catch (IOException ex) {
-	        	ex.printStackTrace();
-	        }
-
+	        //while (System.in.read() != '\n') {}
+			Thread.sleep(3000000);
+	        
 	        // This will fail if the user didn't visit the above URL and hit 'Allow'.
 	        String uid = session.retrieveWebAccessToken(info.requestTokenPair);
 	        AccessTokenPair accessToken = session.getAccessTokenPair();
@@ -197,14 +195,14 @@ public class DropboxConnector //implements IUpdater
 	@Override
 	public ArrayList<CVersionControlPost> GetPosts()
 	{
-		return null;//getChanges();
+		return getChanges();
 	}
 
 	@Override
 	public ArrayList<CVersionControlPost> GetPosts(String PreviousCall)
 	{
-		return null; //getChanges();
+		return getChanges();
 	}
 
-*/
+
 }

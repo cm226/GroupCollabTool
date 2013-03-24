@@ -33,7 +33,7 @@ public class CollabToolServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
-		String feedPost = request.getParameter("feedPost");
+		String feedPost = request.getParameter("feedpost");
 		if(feedPost != null)
 		{
 			if(feedPost.length() != 0)

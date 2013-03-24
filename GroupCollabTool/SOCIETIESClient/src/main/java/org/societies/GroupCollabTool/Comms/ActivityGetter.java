@@ -1,5 +1,6 @@
 package org.societies.GroupCollabTool.Comms;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,28 +71,40 @@ public class ActivityGetter implements IActivityFeedCallback
 				{
 					if(actor.compareTo("User") != 0 &&
 						actor.compareTo("Git") != 0 &&
-								actor.compareTo("dropbox") != 0)
+						actor.compareTo("dropbox") != 0)
 						continue;
+					
+					LOG.info("actor ok with: "+actor);
 				}
 				else if(this.type.compareTo("Code") == 0 && actor.compareTo("Git") != 0)
 					continue;
 				else if(this.type.compareTo("Documents") == 0 && actor.compareTo("dropbox") != 0)
 					continue;
 				
-							
-				
 				LOG.info("actor"+actor);
 				LOG.info("obj"+act.getObject());
 				LOG.info("Targ"+act.getTarget());
 				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				Date posted;
+				try{posted = sdf.parse(act.getVerb());}
+				catch(java.text.ParseException e)
+				{
+					posted = new Date();
+					LOG.info("Date parser Error:"+act.getTarget());
+				}
+				
+				
 				ArrayList<String> targets = new ArrayList<String>();
-
+				if(act.getTarget() != null)
+				{
 					String[] links = act.getTarget().split(",");
 					int linkCnt = 0;
 					for(linkCnt=0; linkCnt< links.length; linkCnt++)
 						targets.add(links[linkCnt]);
-				
-					subActList.add(new ActivityDescription(actor,act.getObject(),targets,new Date()));
+				}
+					subActList.add(new ActivityDescription(actor,act.getObject(),targets,posted));
+					LOG.info("postedDate: "+posted);
 			}
 			
 			int accualCont = subActList.size();

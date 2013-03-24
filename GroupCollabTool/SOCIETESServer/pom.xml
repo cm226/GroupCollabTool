@@ -49,6 +49,25 @@
 	    <version>3.0</version>
 	</dependency>
 	
+	<dependency>
+	    <groupId>com.dropbox.sdk</groupId>
+	    <artifactId>dropbox-client</artifactId>
+	    <version>1.5.3</version>
+	</dependency>
+	
+	
+	<dependency>
+	    <groupId>com.dropbox.sdk</groupId>
+	    <artifactId>json_simple</artifactId>
+	    <version>1.1</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.dropbox.sdk</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.0.3</version>
+	</dependency>
+	
 	<!-- 
 
 	<dependency>
@@ -58,17 +77,9 @@
 	</dependency>
             
 
-	<dependency>
-	    <groupId>com.Dropbox</groupId>
-	    <artifactId>dbsdk</artifactId>
-	    <version>1.5.3</version>
-	</dependency>
+
 	
-	<dependency>
-	    <groupId>com.Dropbox</groupId>
-	    <artifactId>dbJsonSimple</artifactId>
-	    <version>1.1</version>
-	</dependency>
+
 	
 
 	<dependency>

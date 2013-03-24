@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,14 +18,14 @@ import com.dropbox.client2.jsonextract.JsonMap;
 import com.dropbox.client2.jsonextract.JsonThing;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
-*/
+
 
 	 // ------------------------------------------------------------------------
     // State model (load+save to JSON)
 
     public class State
     {
-/*
+
         public final AppKeyPair appKey;
         public final Map<String,AccessTokenPair> links = new HashMap<String,AccessTokenPair>();
         public String cursor;
@@ -112,7 +112,7 @@ import com.dropbox.client2.session.AppKeyPair;
             catch (JsonExtractionException ex) {
                 throw new Exception ("ERROR: State file has incorrect structure: " + ex.getMessage());
             }
-        }*/
+        }
     }
 
    
