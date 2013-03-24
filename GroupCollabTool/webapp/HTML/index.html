@@ -10,8 +10,16 @@
 
 function contentTypeChange()
 {
-	var myTextField = document.getElementById('selectVal');
-	window.location = 'http://localhost:8090/SOCIETEYSGroupcollabTool/CollabToolServlet?stype='+myTextField.value;
+	var Context= document.getElementById('selectVal');
+	window.location = 'file:///C:/Users/Bryce/Dropbox/University/5th%20Year/SOCIETIES/GroupCollabTool/GroupCollabTool/webapp/HTML/index.html?stype='+Context.value;
+}
+
+function feedPost()
+{
+	var feedPost = document.getElementById('feedpost');
+	var Context= document.getElementById('selectVal');
+	
+	window.location = 'file:///C:/Users/Bryce/Dropbox/University/5th%20Year/SOCIETIES/GroupCollabTool/GroupCollabTool/webapp/HTML/index.html?stype='+Context.value+"&feedpost="+feedPost.value;
 }
 
 </script> 
@@ -35,9 +43,9 @@ function contentTypeChange()
         <div id="activityfeed">
 		
 			<form method="get">
-				<textarea rows="3" cols="30" class="box" name="message"></textarea>
+				<textarea rows="3" cols="30" class="box" name="feedpost" id="feedpost"></textarea>
 				<!--<input type="text" class="box" name="message"><br>-->
-				<input type="submit" value="Post">
+				<input type="button" value="Post" onclick='javascript:feedPost();'>
 			</form>
         
             <div id="post">

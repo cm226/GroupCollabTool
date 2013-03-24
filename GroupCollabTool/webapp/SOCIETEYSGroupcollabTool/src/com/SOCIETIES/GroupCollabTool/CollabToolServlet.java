@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.SOCIETIES.GroupCollabTool.Comms.SOCIETIESInterfaceLayer;
+import com.SOCIETIES.GroupCollabTool.Comms.Shared.ActivityDescription;
 import com.SOCIETIES.GroupCollabTool.MainPage.CollabToolDesktop;
 
 
@@ -31,9 +32,21 @@ public class CollabToolServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{		
+	{	
+		String feedPost = request.getParameter("feedPost");
+		if(feedPost != null)
+		{
+			if(feedPost.length() != 0)
+			{
+				SOCIETIESInterfaceLayer intrfacelyr = new SOCIETIESInterfaceLayer();
+				intrfacelyr.makePost(null, feedPost);
+				
+			}
+		}
+		
 		PrintWriter out = response.getWriter();
 		String requestedContent = request.getParameter("stype");
+		
 		
 		CollabToolDesktop mainPage = new CollabToolDesktop(requestedContent);
 		mainPage.writePage(out);

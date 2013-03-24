@@ -37,12 +37,11 @@ public class ActivityFeed implements IPageComponent
 		out.println("");
 		
 		out.println("\t\t\t<form method=\"get\">");
-		out.println("\t\t\t\t<textarea rows=\"3\" cols=\"30\" class=\"box\" name=\"message\"></textarea>");
+		out.println("\t\t\t\t<textarea rows=\"3\" cols=\"30\" class=\"box\" name=\"feedpost\" id=\"feedpost\"></textarea>");
 		out.println("\t\t\t\t<!--<input type=\"text\" class=\"box\" name=\"message\"><br>-->");
-		out.println("\t\t\t\t<input type=\"submit\" value=\"Post\">");
+		out.println("\t\t\t\t<input type=\"button\" value=\"Post\" onclick='javascript:feedPost();'>");
 		out.println("\t\t\t</form>");
 		out.println("");
-		
 		
 	    
 		Iterator<IActivity> activityIt = this.m_activities.iterator();		

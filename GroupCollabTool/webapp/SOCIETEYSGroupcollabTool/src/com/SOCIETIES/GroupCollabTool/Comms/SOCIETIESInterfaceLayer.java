@@ -4,6 +4,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.ActivityDescription;
+import com.SOCIETIES.GroupCollabTool.Comms.Shared.IMember;
 import com.SOCIETIES.GroupCollabTool.Comms.Shared.IServer;
 
 public class SOCIETIESInterfaceLayer {
@@ -25,6 +26,21 @@ public class SOCIETIESInterfaceLayer {
 	            System.err.println("Client exception: " + e.toString());
 	            e.printStackTrace();
 	            return null;
+	        }
+	    }
+	 
+	 public void makePost(IMember user, String userpost)
+	 {
+	        String host = "localhost";
+	        try {
+	            Registry registry = LocateRegistry.getRegistry(host);
+	            IServer stub = (IServer) registry.lookup("IServer");
+	            stub.postToFeed(user, userpost);
+
+	        } catch (Exception e) {
+	            System.err.println("Client exception: " + e.toString());
+	            e.printStackTrace();
+
 	        }
 	    }
 
